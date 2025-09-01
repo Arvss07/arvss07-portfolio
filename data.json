@@ -1,0 +1,147 @@
+{
+  "profile": {
+    "name": "Arvy Aggabao",
+    "brand": "Arvss",
+    "titleKeywords": ["Networking", "Cybersecurity", "Data Analysis"],
+    "photo": "images/me.jpg",
+    "resume": "files/WRITE_UP_PHOTO_STOCK.pdf",
+    "socials": [
+      { "platform": "github", "url": "https://github.com/update-this" },
+      { "platform": "linkedin", "url": "https://linkedin.com/in/update-this" },
+      { "platform": "facebook", "url": "https://facebook.com/update-this" }
+    ],
+    "footerText": "© 2025 Arvss. All rights reserved."
+  },
+  "about": {
+    "intro": "I am a dedicated Information Technology undergraduate with a passion for solving complex problems through innovative technology solutions.",
+    "features": [
+      {
+        "icon": "fa-brain",
+        "title": "Problem Solver",
+        "text": "I thrive on identifying challenges and developing solutions."
+      },
+      {
+        "icon": "fa-users",
+        "title": "Team Collaborator",
+        "text": "Strong communication skills and teamwork experience."
+      },
+      {
+        "icon": "fa-rocket",
+        "title": "Fast Learner",
+        "text": "Adaptable and quick to master new technologies."
+      }
+    ]
+  },
+  "skills": [
+    {
+      "icon": "fa-code",
+      "name": "Programming",
+      "items": [
+        { "label": "Python", "provider": "devicon", "id": "python" },
+        { "label": "Java", "provider": "devicon", "id": "java" },
+        { "label": "C++", "provider": "devicon", "id": "cplusplus" },
+        { "label": "JavaScript", "provider": "devicon", "id": "javascript" },
+        { "label": "HTML5", "provider": "devicon", "id": "html5" },
+        { "label": "CSS3", "provider": "devicon", "id": "css3" },
+        { "label": "SQL", "provider": "simple-icons", "id": "sqlite" }
+      ]
+    },
+    {
+      "icon": "fa-database",
+      "name": "Databases",
+      "items": [
+        { "label": "MySQL", "provider": "devicon", "id": "mysql" },
+        { "label": "PostgreSQL", "provider": "devicon", "id": "postgresql" },
+        { "label": "MongoDB", "provider": "devicon", "id": "mongodb" }
+      ]
+    },
+    {
+      "icon": "fa-shield-halved",
+      "name": "Security",
+      "items": [
+        { "label": "Wireshark", "provider": "skillicons", "id": "wireshark" },
+        { "label": "Nmap", "provider": "simple-icons", "id": "nmap" },
+        {
+          "label": "Metasploit",
+          "provider": "simple-icons",
+          "id": "metasploit"
+        },
+        {
+          "label": "Burp Suite",
+          "provider": "simple-icons",
+          "id": "portswigger"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Network Security Dashboard",
+      "description": "A real-time monitoring dashboard for network security metrics with threat detection.",
+      "image": "https://placehold.co/600x360/2563eb/ffffff?text=Security+Dashboard",
+      "tags": ["Python", "Flask"],
+      "link": "#"
+    },
+    {
+      "title": "Portfolio Website",
+      "description": "A modern, animated, responsive portfolio built with Bootstrap and vanilla JS.",
+      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Portfolio",
+      "tags": ["HTML", "CSS", "JavaScript"],
+      "link": "#"
+    },
+    {
+      "title": "Simple Chat App",
+      "description": "A socket-based chat application with authentication and rooms.",
+      "image": "https://placehold.co/600x360/10b981/ffffff?text=Chat+App",
+      "tags": ["Node.js", "Socket.IO"],
+      "link": "#"
+    }
+  ],
+  "experience": [
+    {
+      "role": "IT Intern",
+      "company": "Tech Corp",
+      "period": "Jun 2024 - Aug 2024",
+      "bullets": [
+        "Assisted in network configuration and monitoring",
+        "Automated reporting scripts using Python",
+        "Collaborated with security team on vulnerability scans"
+      ]
+    },
+    {
+      "role": "Freelance Web Developer",
+      "company": "Self-Employed",
+      "period": "2023 - Present",
+      "bullets": [
+        "Built responsive websites for local businesses",
+        "Optimized SEO and performance",
+        "Deployed sites on Netlify and Vercel"
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "name": "AI for Enhanced Cybersecurity",
+      "issuer": "University",
+      "file": "files/AIForEnhancedCybersecurity.pdf",
+      "year": 2024
+    },
+    {
+      "name": "AI & ML in Cybersecurity",
+      "issuer": "Organization",
+      "file": "files/AInMLInCybersecurity.pdf",
+      "year": 2024
+    },
+    {
+      "name": "Network Plan",
+      "issuer": "Coursework",
+      "file": "files/NetworkPlan.pdf",
+      "year": 2023
+    }
+  ],
+  "contact": {
+    "email": "you@example.com",
+    "phone": "+1 (555) 123-4567",
+    "location": "City, Country"
+  }
+}

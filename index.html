@@ -18,6 +18,12 @@
       rel="stylesheet"
     />
 
+    <!-- Devicon Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
+    />
+
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -39,9 +45,9 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNavbar">
       <div class="container">
-        <a class="navbar-brand" href="#hero">Your Name</a>
+        <a class="navbar-brand" href="#hero" id="brandName">Your Name</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -68,6 +74,9 @@
               <a class="nav-link" href="#experience">Experience</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="#certificates">Certificates</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#contact">Contact</a>
             </li>
           </ul>
@@ -76,15 +85,23 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero">
+    <section id="hero" class="hero-rich">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="grid-overlay"></div>
+      </div>
       <div class="container text-center">
         <div class="hero-content" data-aos="fade-up">
           <img
+            id="heroImage"
             src="https://placehold.co/220x220/2563eb/ffffff?text=Your+Photo"
             alt="Your Photo"
             class="hero-img"
           />
-          <h1>Hello, I'm <span class="highlight">Your Name</span></h1>
+          <h1>
+            Hello, I'm <span class="highlight" id="heroName">Your Name</span>
+          </h1>
           <p>
             A passionate IT Undergraduate specializing in
             <span
@@ -98,86 +115,54 @@
               >View My Work</a
             >
             <a
-              href="your-resume.pdf"
+              id="resumeLink"
+              href="#"
               class="btn btn-outline-primary btn-hero"
               target="_blank"
               download
             >
-              <i class="fas fa-download me-2"></i>Download Resume
+              <i class="fas fa-download me-2"></i><span>Download Resume</span>
             </a>
             <a href="#contact" class="btn btn-outline-primary btn-hero"
               >Let's Connect</a
             >
           </div>
+          <div class="social-icons mt-3" id="heroSocials"></div>
+          <div class="scroll-cue"><span></span></div>
         </div>
       </div>
     </section>
+
+    <div class="section-sep wave-bottom" aria-hidden="true">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path
+          d="M0,0 C300,100 1140,0 1440,100 L1440,0 L0,0 Z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </div>
 
     <!-- About Section -->
     <section id="about">
       <div class="container">
         <h2 class="section-title">About Me</h2>
-        <p>
-          I am a dedicated Information Technology undergraduate with a passion
-          for solving complex problems through innovative technology solutions.
-        </p>
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="feature-card">
-              <i class="fas fa-brain"></i>
-              <h3>Problem Solver</h3>
-              <p>
-                I thrive on identifying challenges and developing solutions.
-              </p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="feature-card">
-              <i class="fas fa-users"></i>
-              <h3>Team Collaborator</h3>
-              <p>Strong communication skills and teamwork experience.</p>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="feature-card">
-              <i class="fas fa-rocket"></i>
-              <h3>Fast Learner</h3>
-              <p>Adaptable and quick to master new technologies.</p>
-            </div>
-          </div>
-        </div>
+        <p
+          id="aboutIntro"
+          class="lead text-center mx-auto"
+          style="max-width: 900px"
+        ></p>
+        <div class="row g-4" id="aboutFeatures"></div>
       </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills">
+    <section id="skills" class="skills-rich">
       <div class="container">
         <h2 class="section-title">Technical Skills</h2>
-        <div class="row g-4">
-          <div class="col-lg-6">
-            <div class="skill-category">
-              <h3><i class="fas fa-code"></i> Programming</h3>
-              <div class="text-center">
-                <span class="skill-badge">Python</span>
-                <span class="skill-badge">Java</span>
-                <span class="skill-badge">C++</span>
-                <span class="skill-badge">JavaScript</span>
-                <span class="skill-badge">HTML/CSS</span>
-                <span class="skill-badge">SQL</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="skill-category">
-              <h3><i class="fas fa-database"></i> Databases</h3>
-              <div class="text-center">
-                <span class="skill-badge">MySQL</span>
-                <span class="skill-badge">PostgreSQL</span>
-                <span class="skill-badge">MongoDB</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="row g-4" id="skillsGrid"></div>
+        <p class="skills-note text-center text-muted mt-3">
+          Icons via skillicons.dev, Simple Icons, and Devicon.
+        </p>
       </div>
     </section>
 
@@ -185,36 +170,30 @@
     <section id="projects">
       <div class="container">
         <h2 class="section-title">Projects</h2>
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <div class="project-card">
-              <img
-                src="https://placehold.co/400x220/2563eb/ffffff?text=Project+1"
-                alt="Project 1"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Network Security Dashboard</h5>
-                <p class="card-text">
-                  A real-time monitoring dashboard for network security metrics
-                  with threat detection.
-                </p>
-                <span class="project-badge">Python</span>
-                <span class="project-badge">Flask</span>
-              </div>
-            </div>
-          </div>
-          <!-- Add more project cards here -->
-        </div>
+        <div class="row g-4" id="projectsGrid"></div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline" id="experienceTimeline"></div>
+      </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certs-rich">
+      <div class="container">
+        <h2 class="section-title">Certificates</h2>
+        <div class="row g-4" id="certificatesGrid"></div>
       </div>
     </section>
 
     <!-- Footer -->
     <footer>
-      <p>&copy; 2025 Your Name. All rights reserved.</p>
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-github"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
+      <p id="footerText">&copy; 2025 Your Name. All rights reserved.</p>
+      <div class="social-icons" id="footerSocials"></div>
     </footer>
 
     <!-- Scripts -->
