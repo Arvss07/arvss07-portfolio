@@ -97,25 +97,35 @@
       "link": "#"
     }
   ],
-  "experience": [
+  "exposure": [
     {
-      "role": "IT Intern",
-      "company": "Tech Corp",
-      "period": "Jun 2024 - Aug 2024",
-      "bullets": [
-        "Assisted in network configuration and monitoring",
-        "Automated reporting scripts using Python",
-        "Collaborated with security team on vulnerability scans"
+      "title": "Cybersecurity Club Mentor",
+      "org": "Campus Cyber Club",
+      "period": "2024 - Present",
+      "highlights": [
+        "Led weekly hands-on sessions on Wireshark and Nmap",
+        "Organized mini CTF challenges for 40+ students",
+        "Guided peers on responsible disclosure practices"
       ]
     },
     {
-      "role": "Freelance Web Developer",
-      "company": "Self-Employed",
+      "title": "Open-Source Contributor",
+      "org": "Various GitHub Projects",
       "period": "2023 - Present",
-      "bullets": [
-        "Built responsive websites for local businesses",
-        "Optimized SEO and performance",
-        "Deployed sites on Netlify and Vercel"
+      "highlights": [
+        "Fixed accessibility issues and improved documentation",
+        "Contributed performance improvements to a JS utility lib",
+        "Reviewed PRs and triaged issues"
+      ]
+    },
+    {
+      "title": "Tech Community Volunteer",
+      "org": "Local STEM Non-Profit",
+      "period": "Summer 2024",
+      "highlights": [
+        "Taught basic web development to high school students",
+        "Set up workshop laptops and network connectivity",
+        "Coordinated with speakers and mentors"
       ]
     }
   ],

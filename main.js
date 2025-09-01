@@ -9,20 +9,55 @@ window.addEventListener("load", () => {
   setTimeout(() => loader && (loader.style.display = "none"), 500);
 });
 
-// Navbar shrink on scroll
+// Header shrink on scroll (custom header)
 window.addEventListener("scroll", () => {
-  const navbar = $("#mainNavbar");
-  navbar?.classList.toggle("navbar-scrolled", window.scrollY > 50);
+  const header = $("#mainHeader");
+  header?.classList.toggle("header-scrolled", window.scrollY > 50);
 });
+
+// Simple scrollspy for active nav highlighting
+function setupScrollSpy() {
+  const links = Array.from(document.querySelectorAll("#appNav .nav-link"));
+  const targets = links
+    .map((a) => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+
+  const setActive = (id) => {
+    links.forEach((a) => {
+      const match = a.getAttribute("href") === `#${id}`;
+      a.classList.toggle("active", match);
+    });
+    positionActivePill();
+  };
+
+  const onScroll = () => {
+    const offset = 120; // account for navbar height
+    let currentId = null;
+    for (const sec of targets) {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top - offset <= 0 && rect.bottom > offset) {
+        currentId = sec.id;
+      }
+    }
+    if (currentId) setActive(currentId);
+  };
+
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+}
 
 // Animate in view with IntersectionObserver
 const io = new IntersectionObserver(
   (entries) => {
     entries.forEach((e) => {
-      if (e.isIntersecting) e.target.classList.add("in-view");
+      if (e.isIntersecting) {
+        e.target.classList.add("in-view");
+      } else {
+        e.target.classList.remove("in-view");
+      }
     });
   },
-  { threshold: 0.15 }
+  { threshold: 0.2 }
 );
 
 function observeAll(container) {
@@ -30,6 +65,24 @@ function observeAll(container) {
 }
 
 // Render helpers
+// Optional icon map for project tags
+const TAG_ICON_MAP = {
+  html: { provider: "devicon", id: "html5" },
+  css: { provider: "devicon", id: "css3" },
+  javascript: { provider: "devicon", id: "javascript" },
+  typescript: { provider: "devicon", id: "typescript" },
+  python: { provider: "devicon", id: "python" },
+  flask: { provider: "simple-icons", id: "flask" },
+  node: { provider: "devicon", id: "nodejs" },
+  "node.js": { provider: "devicon", id: "nodejs" },
+  socketio: { provider: "simple-icons", id: "socketdotio" },
+  "socket.io": { provider: "simple-icons", id: "socketdotio" },
+  react: { provider: "devicon", id: "react" },
+  bootstrap: { provider: "devicon", id: "bootstrap" },
+  aos: { provider: "simple-icons", id: "aos" },
+  git: { provider: "devicon", id: "git" },
+};
+
 function renderSocials(socials) {
   return socials
     .map(
@@ -111,49 +164,70 @@ function renderSkills(skills) {
     .join("");
   observeAll(grid);
 }
-
 function renderProjects(projects) {
   const grid = $("#projectsGrid");
   grid.innerHTML = projects
-    .map(
-      (p) => `
+    .map((p, idx) => {
+      const tags = (p.tags || []).map((t) => {
+        const key = String(t).toLowerCase();
+        const meta = TAG_ICON_MAP[key] || null;
+        const html = meta
+          ? skillIconHTML({ provider: meta.provider, id: meta.id, label: t })
+          : "";
+        return `<span class="project-tag">${html}<span>${t}</span></span>`;
+      });
+
+      return `
       <div class="col-lg-4 col-md-6" data-reveal>
-        <a class="project-card d-block text-decoration-none" href="${
-          p.link || "#"
-        }" target="_blank" rel="noopener" data-aos="fade-up">
-          <img src="${p.image}" alt="${p.title}" />
-          <div class="card-body">
-            <h5 class="card-title">${p.title}</h5>
-            <p class="card-text">${p.description}</p>
-            ${p.tags
-              .map((t) => `<span class="project-badge">${t}</span>`)
-              .join(" ")}
+        <div class="project-card" data-aos="fade-up" data-project>
+          <div class="project-head" role="button" aria-expanded="false" tabindex="0">
+            <img src="${p.image}" alt="${p.title}" />
+            <div class="project-title text-truncate">${p.title}</div>
+            <button class="project-toggle" aria-label="Toggle details" aria-expanded="false">
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
           </div>
-        </a>
-      </div>`
-    )
+          <div class="project-body" id="proj-body-${idx}">
+            <p class="project-desc">${p.description || ""}</p>
+            <div class="project-tags">${tags.join(" ")}</div>
+            <div class="project-actions">
+              ${
+                p.link
+                  ? `<a class="btn btn-sm btn-primary" href="${p.link}" target="_blank" rel="noopener">Open</a>`
+                  : ""
+              }
+              ${
+                p.repo
+                  ? `<a class="btn btn-sm btn-outline-primary" href="${p.repo}" target="_blank" rel="noopener">Source</a>`
+                  : ""
+              }
+            </div>
+          </div>
+        </div>
+      </div>`;
+    })
     .join("");
   observeAll(grid);
+  setupProjectCardToggles();
 }
 
-function renderExperience(exp) {
-  const tl = $("#experienceTimeline");
-  tl.innerHTML = exp
+function renderExposure(items) {
+  const grid = document.getElementById("exposureGrid");
+  grid.innerHTML = (items || [])
     .map(
-      (e) => `
-      <div class="timeline-item" data-reveal data-aos="fade-left">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <h4>${e.role} • <span class="text-primary">${e.company}</span></h4>
-          <span class="text-muted small">${e.period}</span>
-          <ul>
-            ${e.bullets.map((b) => `<li>${b}</li>`).join("")}
+      (x) => `
+      <div class="col-lg-6" data-reveal>
+        <div class="exposure-card" data-aos="fade-up">
+          <h4 class="mb-1">${x.title}</h4>
+          <div class="fw-lighter small mb-2">${x.org} • ${x.period}</div>
+          <ul class="mb-0">
+            ${(x.highlights || []).map((h) => `<li>${h}</li>`).join("")}
           </ul>
         </div>
       </div>`
     )
     .join("");
-  observeAll(tl);
+  observeAll(grid);
 }
 
 function renderCertificates(certs) {
@@ -214,8 +288,6 @@ async function bootstrap() {
     $("#heroImage").src = data.profile.photo;
     const resume = $("#resumeLink");
     resume.href = data.profile.resume || "#";
-    $("#heroSocials").innerHTML = renderSocials(data.profile.socials || []);
-    $("#footerSocials").innerHTML = renderSocials(data.profile.socials || []);
     $("#footerText").textContent = data.profile.footerText || "";
 
     // Typed.js with data keywords
@@ -235,15 +307,115 @@ async function bootstrap() {
     renderAbout(data.about);
     renderSkills(data.skills || []);
     renderProjects(data.projects || []);
-    renderExperience(data.experience || []);
+    // Exposure replaces Experience
+    renderExposure(data.exposure || data.experience || []);
     renderCertificates(data.certificates || []);
     renderContact(data.contact || {});
 
     // AOS init after content
     AOS.init({ duration: 800, once: true });
+
+    // Force dark mode tokens (palette is dark-first)
+    document.documentElement.classList.add("dark");
+
+    // Init scrollspy and header interactions after DOM is ready
+    setupScrollSpy();
+    initHeaderInteractions();
   } catch (e) {
     console.error("Failed to load data.json", e);
   }
 }
 
 document.addEventListener("DOMContentLoaded", bootstrap);
+
+// Expansion toggles for project cards
+function setupProjectCardToggles() {
+  $$(".project-card").forEach((card) => {
+    const head = card.querySelector(".project-head");
+    const body = card.querySelector(".project-body");
+    const toggleBtn = card.querySelector(".project-toggle");
+
+    const setMax = (open) => {
+      if (open) {
+        body.style.maxHeight = body.scrollHeight + "px";
+      } else {
+        body.style.maxHeight = 0;
+      }
+    };
+
+    const toggle = () => {
+      const expanded = card.classList.toggle("expanded");
+      toggleBtn.setAttribute("aria-expanded", String(expanded));
+      head.setAttribute("aria-expanded", String(expanded));
+      setMax(expanded);
+    };
+
+    // Initialize collapsed
+    setMax(false);
+
+    head.addEventListener("click", toggle);
+    head.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggle();
+      }
+    });
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggle();
+    });
+
+    // Adjust maxHeight on resize for smoothness
+    window.addEventListener("resize", () => {
+      if (card.classList.contains("expanded")) {
+        body.style.maxHeight = body.scrollHeight + "px";
+      }
+    });
+  });
+}
+
+// Custom header interactions (hamburger + active pill)
+function initHeaderInteractions() {
+  const header = document.getElementById("mainHeader");
+  const nav = document.getElementById("appNav");
+  const toggle = document.getElementById("navToggle");
+  if (!header || !nav || !toggle) return;
+
+  const close = () => {
+    header.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+  };
+  const open = () => {
+    header.classList.add("open");
+    toggle.setAttribute("aria-expanded", "true");
+  };
+  const toggleMenu = () => {
+    header.classList.contains("open") ? close() : open();
+  };
+
+  toggle.addEventListener("click", toggleMenu);
+  nav.querySelectorAll(".nav-link").forEach((a) => {
+    a.addEventListener("click", () => {
+      close();
+    });
+  });
+
+  window.addEventListener("resize", positionActivePill);
+  positionActivePill();
+}
+
+function positionActivePill() {
+  const nav = document.getElementById("appNav");
+  if (!nav) return;
+  const pill = nav.querySelector(".active-pill");
+  const active =
+    nav.querySelector(".nav-link.active") || nav.querySelector(".nav-link");
+  if (!pill || !active) return;
+  const navRect = nav.getBoundingClientRect();
+  const aRect = active.getBoundingClientRect();
+  const left = aRect.left - navRect.left;
+  const width = aRect.width;
+  pill.style.opacity = "1";
+  pill.style.transform = `translateX(${left}px)`;
+  pill.style.width = `${Math.max(34, width)}px`;
+}
