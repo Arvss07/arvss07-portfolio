@@ -1,0 +1,52 @@
+https://gitlab.com/2231671/2024-2_9438-midIntegrators
+
+Creative Corner
+This project is a simple Java Networked Program with a graphical user interface (GUI), 
+implemented with a Java RMI Structure. It allows users to create an art commission with 
+detailed specifications.
+
+
+https://gitlab.com/2231671/gigapp
+
+Gig Application 
+
+
+    Gig is an online platform used for listening to live music. 
+    This application utilizes the JDBC library and uses MySQL as its data repository. 
+    It follows the Data Access Object (DAO) pattern for Database Operations and 
+    the Model, View, Controller (MVC) architecture for its presentation and business components.
+
+
+
+https://gitlab.com/2231671/2024-2_9438-Integrators
+
+Creative Corner
+This project is a simple Java Networked Program with a graphical user interface (GUI).  
+It allows users to create an art commission with detailed specifications.
+
+
+
+
+
+https://gitlab.com/2231671/gigappimaqt
+
+Gig is an online platform used for listening to live music. 
+    This application utilizes the JDBC library and uses MySQL as its data repository. 
+    It follows the Data Access Object (DAO) pattern for Database Operations and 
+    the swing library for GUI Components.
+
+
+
+https://gitlab.com/2231671/2023-2_9438-Integrators_Python
+https://gitlab.com/2231671/2023-2_9438-Integrators_Java
+
+This game project is a modified version of the classic Word Factory game, Boggle. It is a multiplayer word game called "Boggled" built using CORBA (Common Object Request Broker Architecture) technology and uses MySQL as its Database. The game involves a server program and multiple client programs. The server program manages the game sessions, while the client programs allow players to connect and participate in the game. The project is implemented using Java for the server and client components, with an additional Python client program that supports CORBA.
+How Boggled works:
+
+    Players must first log in to the game.
+    Once a player creates a lobby, other players have a 10-second window to join the game session.
+    The server then sends 20 random letters (13 consonants and 7 vowels) to all the players in the game session.
+    Players have 30 seconds to form and submit as many valid words as possible using the provided letters.
+    A valid word must be at least four letters long and must be an acceptable word according to the server's word list.
+    After the 30-second round, the server calculates each player's score based on the unique words they submitted.
+    The game continues for multiple rounds, and the first player to win three rounds is declared the overall winner.
