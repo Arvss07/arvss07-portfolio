@@ -177,11 +177,18 @@ body {
 
 /* Hero */
 #hero {
-  padding: 8rem 0 6rem;
+  padding: 10rem 0 8rem;
+}
+
+#hero h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 2rem;
 }
 
 .min-vh-75 {
-  min-height: 75vh;
+  min-height: 85vh;
 }
 
 .hero-rich {
@@ -297,6 +304,9 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  font-size: 1.1em;
+  text-shadow: 0 2px 4px rgba(114, 101, 167, 0.3);
 }
 
 .btn-hero {
@@ -864,26 +874,9 @@ section {
   position: relative;
 }
 
-.feature-card i::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "";
-  background: linear-gradient(135deg, var(--accent-color), var(--color-info));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
 .feature-card:hover i {
   transform: scale(1.2) rotateY(10deg);
   filter: drop-shadow(0 5px 15px rgba(114, 101, 167, 0.4));
-}
-
-.feature-card:hover i::before {
-  opacity: 1;
 }
 
 .feature-card .feature-content {
@@ -1669,6 +1662,24 @@ footer .social-icons a:hover {
 /* Responsive tweaks */
 @media (max-width: 991px) {
   #hero {
-    padding-top: 7rem;
+    padding: 8rem 0 6rem;
+  }
+
+  #hero h1 {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 767px) {
+  #hero {
+    padding: 6rem 0 4rem;
+  }
+
+  #hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .min-vh-75 {
+    min-height: 70vh;
   }
 }

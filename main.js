@@ -98,7 +98,7 @@ function renderAbout(about) {
   wrap.innerHTML = about.features
     .map(
       (f) => `
-      <div class="col-md-4" data-reveal>
+      <div class="col-lg-4 col-md-6 col-sm-12" data-reveal>
         <div class="feature-card" data-aos="zoom-in">
           <div class="feature-icon-wrapper">
             <i class="fas ${f.icon}"></i>
@@ -287,14 +287,36 @@ function renderExposure(items) {
         <div class="exposure-card" data-aos="fade-up">
           <h4 class="mb-1">${x.title}</h4>
           <div class="fw-lighter small mb-2">${x.org} • ${x.period}</div>
-          <ul class="mb-0">
+          <ul class="mb-3">
             ${(x.highlights || []).map((h) => `<li>${h}</li>`).join("")}
           </ul>
+          ${
+            x.file
+              ? `
+          <div class="mt-3">
+            <button class="btn btn-sm btn-outline-primary exposure-btn" 
+                    data-file="${x.file}" 
+                    data-name="${x.title}">
+              <i class="fas fa-eye me-1"></i>View Attachment
+            </button>
+          </div>
+          `
+              : ""
+          }
         </div>
       </div>`
     )
     .join("");
   observeAll(grid);
+
+  // Add event listeners for exposure buttons
+  $$(".exposure-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const filePath = this.getAttribute("data-file");
+      const exposureName = this.getAttribute("data-name");
+      showCertificateModal(filePath, exposureName);
+    });
+  });
 }
 
 function renderCertificates(certs) {

@@ -28,6 +28,16 @@
         "icon": "fa-rocket",
         "title": "Fast Learner",
         "text": "Adaptable and quick to master new technologies."
+      },
+      {
+        "icon": "fa-lightbulb",
+        "title": "Innovative Thinker",
+        "text": "I enjoy exploring new ideas and creative solutions."
+      },
+      {
+        "icon": "fa-clock",
+        "title": "Organization and Time Management",
+        "text": "I excel at managing my time effectively and staying organized."
       }
     ]
   },
@@ -109,60 +119,44 @@
   ],
   "projects": [
     {
-      "type": "code",
-      "resource_link": "https://github.com/arvss/cybersecurity-analyzer",
-      "title": "Cybersecurity Threat Analyzer",
-      "description": "Advanced machine learning-based threat detection system that analyzes network traffic patterns and identifies potential security breaches in real-time.",
-      "image": "https://placehold.co/600x360/dc2626/ffffff?text=Threat+Analyzer",
-      "tags": ["Python", "TensorFlow", "Scikit-learn", "Flask"]
-    },
-    {
       "type": "paper",
       "resource_link": "files/NetworkPlan.pdf",
-      "title": "Network Security Architecture Research",
-      "description": "Comprehensive research paper on modern network security architectures and their implementation strategies in enterprise environments.",
-      "image": "https://placehold.co/600x360/7c3aed/ffffff?text=Research+Paper",
-      "tags": ["Network Security", "Research", "Enterprise Architecture"]
+      "title": "Network Architecture (A Term Project)",
+      "description": "Developed a detailed network infrastructure and basic security plan, including equipment and hardware selection, cost estimation, wiring layouts for all the network equipment, security measures, and space allocation for a hypothetical company building as part of an IT course final project on network fundamentals.",
+      "image": "images/projectHeaders/NetPlan.png",
+      "tags": ["Network Security", "Research", "Network Architecture", "Cisco"]
     },
     {
       "type": "code",
       "resource_link": "https://github.com/arvss/portfolio-website",
       "title": "Portfolio Website",
-      "description": "A modern, animated, responsive portfolio built with Bootstrap and vanilla JS featuring dynamic content loading and smooth animations.",
-      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Portfolio",
+      "description": "A portfolio website built with Bootstrap 5, HTML, and vanilla JS featuring dynamic content loading and smooth animations.",
+      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=TBA",
       "tags": ["HTML", "CSS", "JavaScript", "Bootstrap"]
     },
     {
       "type": "others",
-      "resource_link": "files/AIForEnhancedCybersecurity.pdf",
-      "title": "AI-Enhanced Security Framework",
-      "description": "Implementation framework for integrating artificial intelligence into cybersecurity operations for enhanced threat detection and response.",
-      "image": "https://placehold.co/600x360/059669/ffffff?text=AI+Security",
-      "tags": ["AI", "Machine Learning", "Cybersecurity", "Framework"]
-    },
-    {
-      "type": "code",
-      "resource_link": "https://github.com/arvss/chat-application",
-      "title": "Real-time Chat Application",
-      "description": "A scalable socket-based chat application with user authentication, private rooms, file sharing, and message encryption.",
-      "image": "https://placehold.co/600x360/10b981/ffffff?text=Chat+App",
-      "tags": ["Node.js", "Socket.IO", "MongoDB", "JWT"]
+      "resource_link": "files/WRITE_UP_PHOTO_STOCK.pdf",
+      "title": "CTF Write-Up for Photo Stock (Kaspersky)",
+      "description": "Guide on how I found the bug and got the flag from the hosted instance.",
+      "image": "/images/projectHeaders/writeup_photo_stock.png",
+      "tags": ["JWT", "Web Exploitation", "Cybersecurity", "API", "Ruby"]
     },
     {
       "type": "paper",
       "resource_link": "files/AInMLInCybersecurity.pdf",
-      "title": "Machine Learning in Cybersecurity Analysis",
-      "description": "Detailed analysis of machine learning applications in cybersecurity, including threat detection algorithms and behavioral analysis techniques.",
-      "image": "https://placehold.co/600x360/f59e0b/ffffff?text=ML+Analysis",
-      "tags": ["Machine Learning", "Cybersecurity", "Data Analysis"]
+      "title": "Artificial Intelligence and Machine Learning in Cybersecurity",
+      "description": "Detailed analysis of machine learning applications in cybersecurity, including threat detection algorithms and ethical considerations.",
+      "image": "/images/projectHeaders/AIMLCybersec.png",
+      "tags": ["Machine Learning", "Cybersecurity", "AI"]
     },
     {
-      "type": "code",
-      "resource_link": "https://github.com/arvss/network-monitor",
-      "title": "Network Security Dashboard",
-      "description": "A comprehensive real-time monitoring dashboard for network security metrics with automated threat detection and alert systems.",
-      "image": "https://placehold.co/600x360/2563eb/ffffff?text=Security+Dashboard",
-      "tags": ["Python", "Flask", "D3.js", "PostgreSQL"]
+      "type": "paper",
+      "resource_link": "/files/AIForEnhancedCybersecurity.pdf",
+      "title": "Artificial Intelligence for Enhanced Cybersecurity",
+      "description": "A mini literature review on the applications of AI in cybersecurity, particularly in the financial sector.",
+      "image": "/images/projectHeaders/AIEnhancedCybersec.png",
+      "tags": ["Machine Learning", "Cybersecurity", "AI", "Finance"]
     }
   ],
   "exposure": [
@@ -173,7 +167,8 @@
       "highlights": [
         "Participated in the uCTF competition hosted by Trend Micro Philippines.",
         "Placed 56th out of 199 participants from various schools across the Philippines."
-      ]
+      ],
+      "file": "images/certificates/trendmicro_uctf.jpg"
     }
   ],
   "certificates": [
