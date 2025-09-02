@@ -110,6 +110,48 @@ function renderAbout(about) {
   observeAll(wrap);
 }
 
+function renderEducation(education) {
+  const grid = $("#educationGrid");
+  if (!grid) return;
+
+  grid.innerHTML = education
+    .map(
+      (edu) => `
+      <div class="col-lg-4 col-md-6" data-reveal>
+        <div class="education-card" data-aos="fade-up">
+          <div class="education-header">
+            <img src="${edu.school_logo_url}" alt="${
+        edu.school
+      } Logo" class="education-logo" />
+            <div class="education-level">
+              ${
+                edu.education === "college"
+                  ? "College"
+                  : edu.education === "senior_high"
+                  ? "Senior High School"
+                  : "Junior High School"
+              }
+            </div>
+          </div>
+          <div class="education-body">
+            <h4 class="education-school">${edu.school}</h4>
+            <p class="education-location">
+              <i class="fas fa-map-marker-alt me-1"></i>
+              ${edu.location}
+            </p>
+            <p class="education-course">${edu.course_strand}</p>
+            <div class="education-date">
+              <i class="fas fa-calendar-alt me-1"></i>
+              ${edu.date_graduated}
+            </div>
+          </div>
+        </div>
+      </div>`
+    )
+    .join("");
+  observeAll(grid);
+}
+
 function skillIconHTML(item) {
   const isObj = typeof item === "object" && item !== null;
   const label = isObj ? item.label : String(item);
@@ -434,7 +476,7 @@ function showCertificateModal(filePath, certificateName) {
   }, 100);
 }
 
-function renderContact(contact) {
+function renderContact(contact, socials) {
   const section = document.getElementById("contact");
   if (!section) {
     const footer = document.querySelector("footer");
@@ -442,13 +484,71 @@ function renderContact(contact) {
     s.id = "contact";
     s.innerHTML = `
       <div class="container">
-        <h2 class="section-title">Contact</h2>
+        <h2 class="section-title">Let's Connect</h2>
         <div class="row g-4 justify-content-center">
-          <div class="col-lg-6">
-            <div class="contact-card">
-              <p><i class="fas fa-envelope"></i> <a href="mailto:${contact.email}">${contact.email}</a></p>
-              <p><i class="fas fa-phone"></i> <a href="tel:${contact.phone}">${contact.phone}</a></p>
-              <p><i class="fas fa-location-dot"></i> ${contact.location}</p>
+          <div class="col-lg-8">
+            <div class="contact-info-card" data-aos="fade-up">
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="contact-item">
+                    <div class="contact-icon">
+                      <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                      <h5>Primary Email</h5>
+                      <a href="mailto:${contact.email}">${contact.email}</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="contact-item">
+                    <div class="contact-icon">
+                      <i class="fas fa-envelope-open"></i>
+                    </div>
+                    <div class="contact-details">
+                      <h5>Backup Email</h5>
+                      <a href="mailto:${contact.backup_email}">${
+      contact.backup_email
+    }</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="contact-item">
+                    <div class="contact-icon">
+                      <i class="fas fa-location-dot"></i>
+                    </div>
+                    <div class="contact-details">
+                      <h5>Location</h5>
+                      <p>${contact.location}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Social Media Links -->
+              <div class="social-connect mt-4">
+                <h5 class="text-center mb-3">Follow Me</h5>
+                <div class="social-links d-flex justify-content-center gap-3">
+                  ${socials
+                    .map(
+                      (social) => `
+                    <a href="${
+                      social.url
+                    }" target="_blank" rel="noopener" class="social-btn ${
+                        social.platform
+                      }-btn" aria-label="${social.platform}">
+                      <i class="fab fa-${social.platform}"></i>
+                      <span>${
+                        social.platform.charAt(0).toUpperCase() +
+                        social.platform.slice(1)
+                      }</span>
+                    </a>
+                  `
+                    )
+                    .join("")}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -472,6 +572,15 @@ async function bootstrap() {
     $("#heroImage").src = data.profile.photo;
     $("#footerText").textContent = data.profile.footerText || "";
 
+    // Set GitHub button URL
+    const githubBtn = $("#githubBtn");
+    const githubSocial = data.profile.socials?.find(
+      (s) => s.platform === "github"
+    );
+    if (githubBtn && githubSocial) {
+      githubBtn.href = githubSocial.url;
+    }
+
     // Typed.js with data keywords
     if (
       Array.isArray(data.profile.titleKeywords) &&
@@ -487,12 +596,13 @@ async function bootstrap() {
 
     // Sections
     renderAbout(data.about);
+    renderEducation(data.education || []);
     renderSkills(data.skills || []);
     renderProjects(data.projects || []);
     // Exposure replaces Experience
     renderExposure(data.exposure || data.experience || []);
     renderCertificates(data.certificates || []);
-    renderContact(data.contact || {});
+    renderContact(data.contact || {}, data.profile.socials || []);
 
     // AOS init after content
     AOS.init({ duration: 800, once: true });

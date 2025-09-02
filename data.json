@@ -31,6 +31,32 @@
       }
     ]
   },
+  "education": [
+    {
+      "school": "University of Saint Louis Tuguegarao",
+      "education": "college",
+      "course_strand": "Bachelor of Science in Information Technology",
+      "date_graduated": "2025 (Expected)",
+      "school_logo_url": "images/uslt.png",
+      "location": "Tuguegarao City, Cagayan"
+    },
+    {
+      "school": "Lal-lo National High School",
+      "education": "senior_high",
+      "course_strand": "Science, Technology, Engineering and Mathematics (STEM)",
+      "date_graduated": "2021",
+      "school_logo_url": "images/LMNHS.png",
+      "location": "Lal-lo, Cagayan"
+    },
+    {
+      "school": "Saint Louis University",
+      "education": "junior_high",
+      "course_strand": "General Education",
+      "date_graduated": "2019",
+      "school_logo_url": "images/slu.png",
+      "location": "Baguio City, Benguet"
+    }
+  ],
   "skills": [
     {
       "icon": "fa-code",
@@ -184,8 +210,8 @@
     }
   ],
   "contact": {
-    "email": "you@example.com",
-    "phone": "+1 (555) 123-4567",
-    "location": "City, Country"
+    "email": "arvy.aggabao@example.com",
+    "backup_email": "arvss.backup@example.com",
+    "location": "Tuguegarao City, Cagayan, Philippines"
   }
 }

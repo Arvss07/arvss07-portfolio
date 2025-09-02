@@ -905,6 +905,249 @@ footer .social-icons a:hover {
   filter: brightness(0) invert(1);
 }
 
+/* Education Cards */
+.education-card {
+  background: var(--white-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.education-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(91, 59, 88, 0.4);
+  border-color: var(--primary-color);
+}
+
+.education-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.education-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+}
+
+.education-level {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--accent-color)
+  );
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.education-body h4.education-school {
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.education-location {
+  color: var(--light-text);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  font-style: italic;
+}
+
+.education-course {
+  color: var(--dark-text);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.education-date {
+  color: var(--light-text);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Contact Section Redesign */
+.contact-info-card {
+  background: var(--white-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(114, 101, 167, 0.1);
+  border: 1px solid rgba(114, 101, 167, 0.2);
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  background: rgba(114, 101, 167, 0.2);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--accent-color)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.contact-details h5 {
+  color: var(--primary-color);
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.contact-details a {
+  color: var(--dark-text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+  color: var(--primary-color);
+}
+
+.contact-details p {
+  color: var(--dark-text);
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.social-connect {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1.5rem;
+}
+
+.social-connect h5 {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid;
+  text-transform: capitalize;
+}
+
+.social-btn.github-btn {
+  background: #333;
+  color: white;
+  border-color: #333;
+}
+
+.social-btn.github-btn:hover {
+  background: #555;
+  border-color: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(51, 51, 51, 0.4);
+}
+
+.social-btn.linkedin-btn {
+  background: #0077b5;
+  color: white;
+  border-color: #0077b5;
+}
+
+.social-btn.linkedin-btn:hover {
+  background: #005885;
+  border-color: #005885;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 119, 181, 0.4);
+}
+
+.social-btn.facebook-btn {
+  background: #1877f2;
+  color: white;
+  border-color: #1877f2;
+}
+
+.social-btn.facebook-btn:hover {
+  background: #155ba0;
+  border-color: #155ba0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .education-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .contact-details {
+    text-align: center;
+  }
+
+  .social-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-btn {
+    width: 200px;
+    justify-content: center;
+  }
+}
+
 /* Responsive tweaks */
 @media (max-width: 991px) {
   #hero {
