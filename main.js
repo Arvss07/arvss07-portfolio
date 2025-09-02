@@ -166,7 +166,11 @@ function renderSkills(skills) {
 }
 function renderProjects(projects) {
   const grid = $("#projectsGrid");
-  grid.innerHTML = projects
+
+  // Reverse the projects array so the last item appears first
+  const reversedProjects = [...projects].reverse();
+
+  grid.innerHTML = reversedProjects
     .map((p, idx) => {
       const tags = (p.tags || []).map((t) => {
         const key = String(t).toLowerCase();
@@ -177,12 +181,34 @@ function renderProjects(projects) {
         return `<span class="project-tag">${html}<span>${t}</span></span>`;
       });
 
+      // Determine resource button based on type and resource_link
+      let resourceButton = "";
+      if (p.resource_link && p.resource_link !== "#") {
+        if (p.type === "code") {
+          resourceButton = `
+            <a class="resource-btn github-btn" href="${p.resource_link}" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+              <span>View Code</span>
+            </a>
+          `;
+        } else if (p.type === "paper" || p.type === "others") {
+          resourceButton = `
+            <a class="resource-btn pdf-btn" href="${p.resource_link}" target="_blank" rel="noopener">
+              <i class="fas fa-file-pdf"></i>
+              <span>View Document</span>
+            </a>
+          `;
+        }
+      }
+
       return `
-      <div class="col-lg-4 col-md-6" data-reveal>
+      <div class="col-lg-4 col-md-6 project-item" data-reveal data-type="${
+        p.type
+      }">
         <div class="project-card" data-aos="fade-up" data-project>
           <div class="project-head" role="button" aria-expanded="false" tabindex="0">
             <img src="${p.image}" alt="${p.title}" />
-            <div class="project-title text-truncate">${p.title}</div>
+            <div class="project-title">${p.title}</div>
             <button class="project-toggle" aria-label="Toggle details" aria-expanded="false">
               <i class="fa-solid fa-chevron-down"></i>
             </button>
@@ -191,24 +217,17 @@ function renderProjects(projects) {
             <p class="project-desc">${p.description || ""}</p>
             <div class="project-tags">${tags.join(" ")}</div>
             <div class="project-actions">
-              ${
-                p.link
-                  ? `<a class="btn btn-sm btn-primary" href="${p.link}" target="_blank" rel="noopener">Open</a>`
-                  : ""
-              }
-              ${
-                p.repo
-                  ? `<a class="btn btn-sm btn-outline-primary" href="${p.repo}" target="_blank" rel="noopener">Source</a>`
-                  : ""
-              }
+              ${resourceButton}
             </div>
           </div>
         </div>
       </div>`;
     })
     .join("");
+
   observeAll(grid);
   setupProjectCardToggles();
+  setupProjectFilters();
 }
 
 function renderExposure(items) {
@@ -232,23 +251,187 @@ function renderExposure(items) {
 
 function renderCertificates(certs) {
   const grid = $("#certificatesGrid");
+  if (!grid) {
+    console.error("Certificate grid element not found");
+    return;
+  }
+
+  if (!certs || certs.length === 0) {
+    grid.innerHTML =
+      '<div class="col-12 text-center"><p class="text-muted">No certificates available</p></div>';
+    return;
+  }
+
   grid.innerHTML = certs
     .map(
-      (c) => `
+      (c, idx) => `
       <div class="col-lg-4 col-md-6" data-reveal>
         <div class="certificate-card" data-aos="zoom-in">
           <div class="certificate-icon"><i class="fas fa-award"></i></div>
-          <h5>${c.name}</h5>
-          <p class="mb-1">${c.issuer}</p>
-          <span class="badge bg-primary-subtle text-primary">${c.year}</span>
+          <h5>${c.name || "Certificate"}</h5>
+          <p class="mb-1">${c.issuer || "Unknown Issuer"}</p>
+          <span class="badge bg-primary-subtle text-primary">${
+            c.year || "N/A"
+          }</span>
           <div class="mt-3">
-            <a class="btn btn-sm btn-outline-primary" href="${c.file}" target="_blank" rel="noopener">View</a>
+            <button class="btn btn-sm btn-outline-primary certificate-btn" 
+                    data-file="${c.file}" 
+                    data-name="${c.name || "Certificate"}">
+              <i class="fas fa-eye me-1"></i>View Certificate
+            </button>
           </div>
         </div>
       </div>`
     )
     .join("");
+
   observeAll(grid);
+
+  // Add event listeners for certificate buttons
+  $$(".certificate-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const filePath = this.getAttribute("data-file");
+      const certificateName = this.getAttribute("data-name");
+      showCertificateModal(filePath, certificateName);
+    });
+  });
+
+  // Add modal to the page if it doesn't exist
+  if (!document.getElementById("certificateModal")) {
+    const modalHTML = `
+      <div class="modal fade" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content" style="background: var(--white-bg); border: 1px solid var(--border-color);">
+            <div class="modal-header" style="border-bottom: 1px solid var(--border-color);">
+              <h5 class="modal-title text-white" id="certificateModalLabel">Certificate</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+              <div id="certificateContent">
+                <div class="spinner-border text-primary" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modalHTML);
+  }
+}
+
+// Function to show certificate in modal
+function showCertificateModal(filePath, certificateName) {
+  const modalElement = document.getElementById("certificateModal");
+  const modalTitle = document.getElementById("certificateModalLabel");
+  const certificateContent = document.getElementById("certificateContent");
+
+  if (!modalElement || !modalTitle || !certificateContent) {
+    console.error("Modal elements not found");
+    return;
+  }
+
+  // Show modal manually without Bootstrap JS
+  modalTitle.textContent = certificateName || "Certificate";
+
+  // Show loading spinner
+  certificateContent.innerHTML = `
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  `;
+
+  // Show modal manually
+  modalElement.style.display = "block";
+  modalElement.classList.add("show");
+  modalElement.setAttribute("aria-modal", "true");
+  modalElement.setAttribute("role", "dialog");
+  modalElement.removeAttribute("aria-hidden");
+  document.body.classList.add("modal-open");
+
+  // Add backdrop if it doesn't exist
+  let backdrop = document.querySelector(".modal-backdrop");
+  if (!backdrop) {
+    backdrop = document.createElement("div");
+    backdrop.className = "modal-backdrop fade show";
+    document.body.appendChild(backdrop);
+  }
+
+  // Close modal function
+  const closeModal = () => {
+    modalElement.style.display = "none";
+    modalElement.classList.remove("show");
+    modalElement.setAttribute("aria-hidden", "true");
+    modalElement.removeAttribute("aria-modal");
+    modalElement.removeAttribute("role");
+    document.body.classList.remove("modal-open");
+    if (backdrop) {
+      backdrop.remove();
+    }
+  };
+
+  // Add close functionality
+  const closeButtons = modalElement.querySelectorAll(
+    '[data-bs-dismiss="modal"]'
+  );
+  closeButtons.forEach((btn) => {
+    btn.onclick = closeModal;
+  });
+
+  // Close on backdrop click
+  backdrop.onclick = closeModal;
+
+  // Close on Escape key
+  const escapeHandler = (e) => {
+    if (e.key === "Escape") {
+      closeModal();
+      document.removeEventListener("keydown", escapeHandler);
+    }
+  };
+  document.addEventListener("keydown", escapeHandler);
+
+  // Small delay to ensure modal is visible before loading content
+  setTimeout(() => {
+    if (!filePath) {
+      certificateContent.innerHTML = `
+        <div class="alert alert-warning" role="alert">
+          <i class="fas fa-exclamation-triangle me-2"></i>
+          Certificate file not available
+        </div>
+      `;
+      return;
+    }
+
+    // Check if file is a PDF or image
+    if (filePath.toLowerCase().endsWith(".pdf")) {
+      certificateContent.innerHTML = `
+        <div class="pdf-container">
+          <embed src="${filePath}" type="application/pdf" width="100%" height="500px" style="border-radius: 8px; border: 1px solid var(--border-color);" />
+          <div class="mt-3">
+            <a href="${filePath}" target="_blank" class="btn btn-primary btn-sm">
+              <i class="fas fa-external-link-alt me-1"></i>Open in New Tab
+            </a>
+          </div>
+        </div>
+      `;
+    } else {
+      // Assume it's an image
+      certificateContent.innerHTML = `
+        <div class="image-container">
+          <img src="${filePath}" 
+               alt="${certificateName}" 
+               class="img-fluid" 
+               style="max-height: 500px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"
+               onload="this.style.opacity=1" 
+               onerror="this.parentElement.innerHTML='<div class=\\'alert alert-danger\\' role=\\'alert\\'>Failed to load certificate image</div>'"
+               style="opacity: 0; transition: opacity 0.3s ease;" />
+        </div>
+      `;
+    }
+  }, 100);
 }
 
 function renderContact(contact) {
@@ -281,13 +464,12 @@ async function bootstrap() {
 
     // Profile and hero
     if (data.profile?.name) {
-      document.title = `${data.profile.name} - IT Undergraduate Portfolio`;
+      const firstName = data.profile.name.split(" ")[0];
+      document.title = `${firstName} - Portfolio`;
     }
     $("#brandName").textContent = data.profile.brand || data.profile.name;
     $("#heroName").textContent = data.profile.name;
     $("#heroImage").src = data.profile.photo;
-    const resume = $("#resumeLink");
-    resume.href = data.profile.resume || "#";
     $("#footerText").textContent = data.profile.footerText || "";
 
     // Typed.js with data keywords
@@ -330,6 +512,8 @@ document.addEventListener("DOMContentLoaded", bootstrap);
 
 // Expansion toggles for project cards
 function setupProjectCardToggles() {
+  let expandedCard = null;
+
   $$(".project-card").forEach((card) => {
     const head = card.querySelector(".project-head");
     const body = card.querySelector(".project-body");
@@ -337,21 +521,88 @@ function setupProjectCardToggles() {
 
     const setMax = (open) => {
       if (open) {
-        body.style.maxHeight = body.scrollHeight + "px";
+        // Reset max-height to measure actual content height
+        body.style.maxHeight = "none";
+        body.style.padding = "1.2rem 1.4rem 1.4rem";
+        body.style.opacity = "1";
+
+        // Get the actual content height including padding
+        const height = body.scrollHeight;
+
+        // Reset to collapsed state for animation
+        body.style.maxHeight = "0";
+        body.style.padding = "0 1.4rem";
+        body.style.opacity = "0";
+
+        // Force reflow and animate to full height with some extra space
+        requestAnimationFrame(() => {
+          body.style.maxHeight = height + 40 + "px";
+          body.style.padding = "1.2rem 1.4rem 1.4rem";
+          body.style.opacity = "1";
+        });
       } else {
-        body.style.maxHeight = 0;
+        // Get current height for smooth collapse
+        const currentHeight = body.scrollHeight;
+        body.style.maxHeight = currentHeight + "px";
+
+        // Force reflow then collapse
+        requestAnimationFrame(() => {
+          body.style.maxHeight = "0";
+          body.style.padding = "0 1.4rem";
+          body.style.opacity = "0";
+        });
       }
     };
 
+    const closeCard = () => {
+      card.classList.remove("expanded");
+      toggleBtn.setAttribute("aria-expanded", "false");
+      head.setAttribute("aria-expanded", "false");
+      setMax(false);
+      if (expandedCard === card) {
+        expandedCard = null;
+      }
+    };
+
+    const openCard = () => {
+      // Close previously expanded card
+      if (expandedCard && expandedCard !== card) {
+        const prevBody = expandedCard.querySelector(".project-body");
+        const prevToggleBtn = expandedCard.querySelector(".project-toggle");
+        const prevHead = expandedCard.querySelector(".project-head");
+
+        expandedCard.classList.remove("expanded");
+        prevToggleBtn.setAttribute("aria-expanded", "false");
+        prevHead.setAttribute("aria-expanded", "false");
+
+        // Smooth collapse of previous card
+        const currentHeight = prevBody.scrollHeight;
+        prevBody.style.maxHeight = currentHeight + "px";
+        requestAnimationFrame(() => {
+          prevBody.style.maxHeight = "0";
+          prevBody.style.padding = "0 1.4rem";
+          prevBody.style.opacity = "0";
+        });
+      }
+
+      card.classList.add("expanded");
+      toggleBtn.setAttribute("aria-expanded", "true");
+      head.setAttribute("aria-expanded", "true");
+      setMax(true);
+      expandedCard = card;
+    };
+
     const toggle = () => {
-      const expanded = card.classList.toggle("expanded");
-      toggleBtn.setAttribute("aria-expanded", String(expanded));
-      head.setAttribute("aria-expanded", String(expanded));
-      setMax(expanded);
+      const isExpanded = card.classList.contains("expanded");
+      if (isExpanded) {
+        closeCard();
+      } else {
+        openCard();
+      }
     };
 
     // Initialize collapsed
-    setMax(false);
+    body.style.maxHeight = "0";
 
     head.addEventListener("click", toggle);
     head.addEventListener("keydown", (e) => {
@@ -366,11 +617,116 @@ function setupProjectCardToggles() {
     });
 
     // Adjust maxHeight on resize for smoothness
-    window.addEventListener("resize", () => {
+    const resizeHandler = () => {
       if (card.classList.contains("expanded")) {
-        body.style.maxHeight = body.scrollHeight + "px";
+        body.style.maxHeight = "none";
+        body.style.padding = "1.2rem 1.4rem 1.4rem";
+        body.style.opacity = "1";
+        const height = body.scrollHeight;
+        body.style.maxHeight = height + 40 + "px";
       }
+    };
+
+    window.addEventListener("resize", resizeHandler);
+
+    // Store the resize handler reference for cleanup if needed
+    card._resizeHandler = resizeHandler;
+  });
+
+  // Close expanded card when clicking outside
+  const outsideClickHandler = (e) => {
+    if (expandedCard && !expandedCard.contains(e.target)) {
+      const body = expandedCard.querySelector(".project-body");
+      const toggleBtn = expandedCard.querySelector(".project-toggle");
+      const head = expandedCard.querySelector(".project-head");
+
+      expandedCard.classList.remove("expanded");
+      toggleBtn.setAttribute("aria-expanded", "false");
+      head.setAttribute("aria-expanded", "false");
+
+      const currentHeight = body.scrollHeight;
+      body.style.maxHeight = currentHeight + "px";
+      requestAnimationFrame(() => {
+        body.style.maxHeight = "0";
+        body.style.padding = "0 1.4rem";
+        body.style.opacity = "0";
+      });
+      expandedCard = null;
+    }
+  };
+
+  document.addEventListener("click", outsideClickHandler);
+}
+
+// Project filtering functionality
+function setupProjectFilters() {
+  const tabButtons = $$(".tab-btn");
+  const projectItems = $$(".project-item");
+
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter");
+
+      // Update active tab
+      tabButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      // Close any expanded project cards first
+      const expandedCards = $$(".project-card.expanded");
+      expandedCards.forEach((card) => {
+        const body = card.querySelector(".project-body");
+        const toggleBtn = card.querySelector(".project-toggle");
+        const head = card.querySelector(".project-head");
+
+        card.classList.remove("expanded");
+        toggleBtn.setAttribute("aria-expanded", "false");
+        head.setAttribute("aria-expanded", "false");
+
+        const currentHeight = body.scrollHeight;
+        body.style.maxHeight = currentHeight + "px";
+        requestAnimationFrame(() => {
+          body.style.maxHeight = "0";
+          body.style.padding = "0 1.4rem";
+          body.style.opacity = "0";
+        });
+      });
+
+      // Filter projects with smoother animation
+      projectItems.forEach((item, index) => {
+        const projectType = item.getAttribute("data-type");
+        const shouldShow = filter === "all" || projectType === filter;
+        const card = item.querySelector(".project-card");
+
+        if (shouldShow) {
+          // Show items with staggered delay
+          item.style.display = "block";
+          item.classList.remove("hiding");
+
+          setTimeout(() => {
+            card.classList.remove("filtered-out");
+            card.classList.add("filtered-in");
+          }, index * 50); // Staggered appearance
+        } else {
+          // Hide items immediately but with animation
+          card.classList.remove("filtered-in");
+          card.classList.add("filtered-out");
+          item.classList.add("hiding");
+
+          // Actually hide after animation completes
+          setTimeout(() => {
+            if (card.classList.contains("filtered-out")) {
+              item.style.display = "none";
+            }
+          }, 400);
+        }
+      });
     });
+  });
+
+  // Initialize all projects as visible
+  projectItems.forEach((item) => {
+    const card = item.querySelector(".project-card");
+    card.classList.add("filtered-in");
   });
 }
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Name - IT Undergraduate Portfolio</title>
+    <link rel="icon" type="image/png" href="images/logo.png" />
 
     <!-- Bootstrap CSS -->
     <link
@@ -104,16 +105,6 @@
                 <a href="#projects" class="btn btn-primary btn-hero"
                   >View My Work</a
                 >
-                <a
-                  id="resumeLink"
-                  href="#"
-                  class="btn btn-outline-primary btn-hero"
-                  target="_blank"
-                  download
-                >
-                  <i class="fas fa-download me-2"></i
-                  ><span>Download Resume</span>
-                </a>
                 <a href="#contact" class="btn btn-outline-primary btn-hero">
                   <i class="fas fa-paper-plane me-2"></i>
                   Let's Connect
@@ -171,6 +162,16 @@
     <section id="projects">
       <div class="container">
         <h2 class="section-title">Projects</h2>
+        <div class="project-tabs mb-4">
+          <div class="tabs-container">
+            <button class="tab-btn active" data-filter="all">All</button>
+            <button class="tab-btn" data-filter="code">Coding Projects</button>
+            <button class="tab-btn" data-filter="paper">
+              Research & Write-ups
+            </button>
+            <button class="tab-btn" data-filter="others">Others</button>
+          </div>
+        </div>
         <div class="row g-4" id="projectsGrid"></div>
       </div>
     </section>
