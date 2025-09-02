@@ -5,14 +5,14 @@
     "titleKeywords": ["Networking", "Cybersecurity", "Data Analysis"],
     "photo": "images/me.jpg",
     "socials": [
-      { "platform": "github", "url": "https://github.com/update-this" },
-      { "platform": "linkedin", "url": "https://linkedin.com/in/update-this" },
-      { "platform": "facebook", "url": "https://facebook.com/update-this" }
+      { "platform": "github", "url": "https://github.com/Arvss07" },
+      { "platform": "linkedin", "url": "https://www.linkedin.com/in/arvss07" },
+      { "platform": "facebook", "url": "https://www.facebook.com/Arvss07" }
     ],
     "footerText": "© 2025 Arvss. All rights reserved."
   },
   "about": {
-    "intro": "I am a dedicated Information Technology undergraduate with a passion for solving complex problems through innovative technology solutions.",
+    "intro": "I am a dedicated Information Technology undergraduate with a passion for solving complex problems through innovative technology solutions. I am eager to be a part of an organization or company that will enrich my potentials, build my character and utilize my knowledge and skills in the best possible way for achieving the organization's goals.",
     "features": [
       {
         "icon": "fa-brain",
@@ -36,25 +36,33 @@
       "school": "University of Saint Louis Tuguegarao",
       "education": "college",
       "course_strand": "Bachelor of Science in Information Technology",
-      "date_graduated": "2025 (Expected)",
+      "date_graduated": "2027 (Expected)",
       "school_logo_url": "images/uslt.png",
       "location": "Tuguegarao City, Cagayan"
     },
     {
-      "school": "Lal-lo National High School",
-      "education": "senior_high",
-      "course_strand": "Science, Technology, Engineering and Mathematics (STEM)",
-      "date_graduated": "2021",
-      "school_logo_url": "images/LMNHS.png",
-      "location": "Lal-lo, Cagayan"
-    },
-    {
       "school": "Saint Louis University",
-      "education": "junior_high",
-      "course_strand": "General Education",
-      "date_graduated": "2019",
+      "education": "college",
+      "course_strand": "Bachelor of Science in Information Technology (3rd year)",
+      "date_graduated": "2022-2024",
       "school_logo_url": "images/slu.png",
       "location": "Baguio City, Benguet"
+    },
+    {
+      "school": "Luciano Millan National High School",
+      "education": "senior_high",
+      "course_strand": "Science, Technology, Engineering and Mathematics (STEM)",
+      "date_graduated": "July 2022",
+      "school_logo_url": "images/LMNHS.png",
+      "location": "Asingan, Pangasinan"
+    },
+    {
+      "school": "Luciano Millan National High School",
+      "education": "junior_high",
+      "course_strand": "K to 12 Curriculum",
+      "date_graduated": "2020",
+      "school_logo_url": "images/LMNHS.png",
+      "location": "Asingan, Pangasinan"
     }
   ],
   "skills": [
@@ -159,59 +167,26 @@
   ],
   "exposure": [
     {
-      "title": "Cybersecurity Club Mentor",
-      "org": "Campus Cyber Club",
-      "period": "2024 - Present",
+      "title": "Trend Micro uCTF Challenge",
+      "org": "Trend Micro",
+      "period": "2025",
       "highlights": [
-        "Led weekly hands-on sessions on Wireshark and Nmap",
-        "Organized mini CTF challenges for 40+ students",
-        "Guided peers on responsible disclosure practices"
-      ]
-    },
-    {
-      "title": "Open-Source Contributor",
-      "org": "Various GitHub Projects",
-      "period": "2023 - Present",
-      "highlights": [
-        "Fixed accessibility issues and improved documentation",
-        "Contributed performance improvements to a JS utility lib",
-        "Reviewed PRs and triaged issues"
-      ]
-    },
-    {
-      "title": "Tech Community Volunteer",
-      "org": "Local STEM Non-Profit",
-      "period": "Summer 2024",
-      "highlights": [
-        "Taught basic web development to high school students",
-        "Set up workshop laptops and network connectivity",
-        "Coordinated with speakers and mentors"
+        "Participated in the uCTF competition hosted by Trend Micro Philippines.",
+        "Placed 56th out of 199 participants from various schools across the Philippines."
       ]
     }
   ],
   "certificates": [
     {
-      "name": "AI for Enhanced Cybersecurity",
-      "issuer": "University",
-      "file": "images/uslt.png",
-      "year": 2024
-    },
-    {
-      "name": "AI & ML in Cybersecurity",
-      "issuer": "Organization",
-      "file": "files/AInMLInCybersecurity.pdf",
-      "year": 2024
-    },
-    {
-      "name": "Network Plan",
-      "issuer": "Coursework",
-      "file": "files/NetworkPlan.pdf",
-      "year": 2023
+      "name": "Kaspersky CTF 2025",
+      "issuer": "Kaspersky",
+      "file": "images/certificates/kaspersky_ctf.png",
+      "year": 2025
     }
   ],
   "contact": {
-    "email": "arvy.aggabao@example.com",
-    "backup_email": "arvss.backup@example.com",
-    "location": "Tuguegarao City, Cagayan, Philippines"
+    "email": "aggabaoarvy072004@gmail.com",
+    "backup_email": "aggabaoarvy072004@yahoo.com",
+    "location": "Cabagan, Isabela, Philippines"
   }
 }

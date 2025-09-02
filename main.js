@@ -100,9 +100,13 @@ function renderAbout(about) {
       (f) => `
       <div class="col-md-4" data-reveal>
         <div class="feature-card" data-aos="zoom-in">
-          <i class="fas ${f.icon}"></i>
-          <h3>${f.title}</h3>
-          <p>${f.text}</p>
+          <div class="feature-icon-wrapper">
+            <i class="fas ${f.icon}"></i>
+          </div>
+          <div class="feature-content">
+            <h3>${f.title}</h3>
+            <p>${f.text}</p>
+          </div>
         </div>
       </div>`
     )
@@ -120,28 +124,30 @@ function renderEducation(education) {
       <div class="col-lg-4 col-md-6" data-reveal>
         <div class="education-card" data-aos="fade-up">
           <div class="education-header">
-            <img src="${edu.school_logo_url}" alt="${
+            <div class="education-logo-wrapper">
+              <img src="${edu.school_logo_url}" alt="${
         edu.school
       } Logo" class="education-logo" />
+            </div>
             <div class="education-level">
               ${
                 edu.education === "college"
                   ? "College"
                   : edu.education === "senior_high"
-                  ? "Senior High School"
-                  : "Junior High School"
+                  ? "Senior High"
+                  : "Junior High"
               }
             </div>
           </div>
           <div class="education-body">
             <h4 class="education-school">${edu.school}</h4>
             <p class="education-location">
-              <i class="fas fa-map-marker-alt me-1"></i>
+              <i class="fas fa-map-marker-alt"></i>
               ${edu.location}
             </p>
             <p class="education-course">${edu.course_strand}</p>
             <div class="education-date">
-              <i class="fas fa-calendar-alt me-1"></i>
+              <i class="fas fa-calendar-alt"></i>
               ${edu.date_graduated}
             </div>
           </div>
