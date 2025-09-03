@@ -72,15 +72,16 @@ const TAG_ICON_MAP = {
   javascript: { provider: "devicon", id: "javascript" },
   typescript: { provider: "devicon", id: "typescript" },
   python: { provider: "devicon", id: "python" },
-  flask: { provider: "simple-icons", id: "flask" },
+  gitlab: { provider: "simple-icons", id: "gitlab" },
   node: { provider: "devicon", id: "nodejs" },
-  "node.js": { provider: "devicon", id: "nodejs" },
-  socketio: { provider: "simple-icons", id: "socketdotio" },
-  "socket.io": { provider: "simple-icons", id: "socketdotio" },
   react: { provider: "devicon", id: "react" },
   bootstrap: { provider: "devicon", id: "bootstrap" },
-  aos: { provider: "simple-icons", id: "aos" },
   git: { provider: "devicon", id: "git" },
+  java: { provider: "devicon", id: "java" },
+  javascript: { provider: "devicon", id: "javascript" },
+  ruby: { provider: "devicon", id: "ruby" },
+  cisco: { provider: "simpleicons", id: "cisco" },
+  mysql: { provider: "devicon", id: "mysql" },
 };
 
 function renderSocials(socials) {

@@ -119,6 +119,39 @@
   ],
   "projects": [
     {
+      "type": "code",
+      "resource_link": "https://gitlab.com/2231671/gigappimaqt",
+      "title": "Gig Application (Java and MySQL Programming)",
+      "description": "A platform for live music streaming built with Java, MySQL, and JDBC. Features DAO pattern for database operations and MVC architecture.",
+      "image": "https://placehold.co/600x360/7a28cb/ffffff?text=Java%20-%20MySQL%20Programming",
+      "tags": ["Java", "MySQL", "Java Swing"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://gitlab.com/2231671/2024-2_9438-midIntegrators",
+      "title": "Creative Corner (Java Networking Project)",
+      "description": "This project uses Java RMI Structure following a client-server architecture, allowing users to create art commission with detailed specifications",
+      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Java%20Networking",
+      "tags": ["Java", "Client-Server", "Java Swing"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://gitlab.com/2231671/2023-2_9438-Integrators_Java",
+      "title": "Boggle Word Game(Java CORBA Project)",
+      "description": "A multiplayer word game based on Boggle, built with Java using CORBA architecture and MySQL database. Players compete in timed rounds to form words from random letters, with the first to win three rounds declared the winner.",
+      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Java%20CORBA",
+      "tags": ["Java", "CORBA", "MySQL"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://gitlab.com/2231671/2023-2_9438-Integrators_Python",
+      "title": "Boggle Word Game(Python CORBA Project)",
+      "description": "A multiplayer word game based on Boggle, built with Python using CORBA architecture and MySQL database. Players compete in timed rounds to form words from random letters, with the first to win three rounds declared the winner.",
+      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Python%20CORBA",
+      "tags": ["Python", "omniORBpy", "MySQL"]
+    },
+
+    {
       "type": "paper",
       "resource_link": "files/NetworkPlan.pdf",
       "title": "Network Architecture (A Term Project)",
@@ -127,25 +160,9 @@
       "tags": ["Network Security", "Research", "Network Architecture", "Cisco"]
     },
     {
-      "type": "code",
-      "resource_link": "https://github.com/arvss/portfolio-website",
-      "title": "Portfolio Website",
-      "description": "A portfolio website built with Bootstrap 5, HTML, and vanilla JS featuring dynamic content loading and smooth animations.",
-      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=TBA",
-      "tags": ["HTML", "CSS", "JavaScript", "Bootstrap"]
-    },
-    {
-      "type": "others",
-      "resource_link": "files/WRITE_UP_PHOTO_STOCK.pdf",
-      "title": "CTF Write-Up for Photo Stock (Kaspersky)",
-      "description": "Guide on how I found the bug and got the flag from the hosted instance.",
-      "image": "/images/projectHeaders/writeup_photo_stock.png",
-      "tags": ["JWT", "Web Exploitation", "Cybersecurity", "API", "Ruby"]
-    },
-    {
       "type": "paper",
       "resource_link": "files/AInMLInCybersecurity.pdf",
-      "title": "Artificial Intelligence and Machine Learning in Cybersecurity",
+      "title": "Artificial Intelligence and Machine Learning in Cybersecurity (A Term Project)",
       "description": "Detailed analysis of machine learning applications in cybersecurity, including threat detection algorithms and ethical considerations.",
       "image": "/images/projectHeaders/AIMLCybersec.png",
       "tags": ["Machine Learning", "Cybersecurity", "AI"]
@@ -153,13 +170,42 @@
     {
       "type": "paper",
       "resource_link": "/files/AIForEnhancedCybersecurity.pdf",
-      "title": "Artificial Intelligence for Enhanced Cybersecurity",
+      "title": "Artificial Intelligence for Enhanced Cybersecurity (A Term Project)",
       "description": "A mini literature review on the applications of AI in cybersecurity, particularly in the financial sector.",
       "image": "/images/projectHeaders/AIEnhancedCybersec.png",
       "tags": ["Machine Learning", "Cybersecurity", "AI", "Finance"]
+    },
+
+    {
+      "type": "code",
+      "resource_link": "https://github.com/arvss/portfolio-website",
+      "title": "Portfolio Website",
+      "description": "A portfolio website built with Bootstrap 5, HTML, and vanilla JS featuring dynamic content loading and smooth animations.",
+      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=TBA",
+      "tags": ["HTML", "CSS", "JavaScript", "Bootstrap"]
+    },
+
+    {
+      "type": "others",
+      "resource_link": "files/WRITE_UP_PHOTO_STOCK.pdf",
+      "title": "CTF Write-Up for Photo Stock (Kaspersky)",
+      "description": "Guide on how I found the bug and got the flag from the hosted instance.",
+      "image": "/images/projectHeaders/writeup_photo_stock.png",
+      "tags": ["JWT", "Web Exploitation", "Cybersecurity", "API", "Ruby"]
     }
   ],
   "exposure": [
+    {
+      "title": "Kaspersky CTF 2025",
+      "org": "Kaspersky",
+      "period": "2025",
+      "highlights": [
+        "Participated in an international competition CTF event hosted by Kaspersky.",
+        "Placed 29th out of 716 participants from various schools and organizations across the Asia-Oceania region.",
+        "Placed 5th in ranking in the Philippines."
+      ],
+      "file": "images/projectHeaders/kasperskf_ctf_banner.png"
+    },
     {
       "title": "Trend Micro uCTF Challenge",
       "org": "Trend Micro",
