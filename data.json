@@ -78,11 +78,10 @@
   "skills": [
     {
       "icon": "fa-code",
-      "name": "Programming",
+      "name": "Programming Languages",
       "items": [
         { "label": "Python", "provider": "devicon", "id": "python" },
         { "label": "Java", "provider": "devicon", "id": "java" },
-        { "label": "C++", "provider": "devicon", "id": "cplusplus" },
         { "label": "JavaScript", "provider": "devicon", "id": "javascript" },
         { "label": "HTML5", "provider": "devicon", "id": "html5" },
         { "label": "CSS3", "provider": "devicon", "id": "css3" },
@@ -90,29 +89,112 @@
       ]
     },
     {
-      "icon": "fa-database",
-      "name": "Databases",
+      "icon": "fa-gear",
+      "name": "Frameworks & Libraries",
       "items": [
-        { "label": "MySQL", "provider": "devicon", "id": "mysql" },
-        { "label": "PostgreSQL", "provider": "devicon", "id": "postgresql" },
-        { "label": "MongoDB", "provider": "devicon", "id": "mongodb" }
+        { "label": "Bootstrap", "provider": "skillicons", "id": "bootstrap" },
+        {
+          "label": "Tailwind CSS",
+          "provider": "skillicons",
+          "id": "tailwindcss"
+        },
+        { "label": "Node.js", "provider": "skillicons", "id": "nodejs" },
+        { "label": "Next.JS", "provider": "skillicons", "id": "nextjs" },
+        { "label": "Plotly", "provider": "simple-icons", "id": "plotly" }
+      ]
+    },
+    {
+      "icon": "fa-database",
+      "name": "Databases & Backend",
+      "items": [
+        { "label": "MySQL", "provider": "skillicons", "id": "mysql" },
+        { "label": "Firebase", "provider": "skillicons", "id": "firebase" },
+        { "label": "Supabase", "provider": "skillicons", "id": "supabase" },
+        { "label": "Appwrite", "provider": "devicon", "id": "appwrite" }
+      ]
+    },
+    {
+      "icon": "fa-cloud",
+      "name": "Cloud & Deployment",
+      "items": [
+        { "label": "Vercel", "provider": "skillicons", "id": "vercel" },
+        { "label": "Docker", "provider": "skillicons", "id": "docker" },
+        { "label": "Google Cloud", "provider": "skillicons", "id": "gcp" },
+        { "label": "Cisco", "provider": "simple-icons", "id": "cisco" },
+        { "label": "Render", "provider": "simple-icons", "id": "render" },
+        { "label": "n8n", "provider": "simple-icons", "id": "n8n" }
+      ]
+    },
+    {
+      "icon": "fa-toolbox",
+      "name": "Tools & Productivity",
+      "items": [
+        { "label": "Git", "provider": "skillicons", "id": "git" },
+        { "label": "Github", "provider": "skillicons", "id": "github" },
+        { "label": "Gitlab", "provider": "skillicons", "id": "gitlab" },
+        { "label": "Figma", "provider": "skillicons", "id": "figma" },
+        { "label": "Canva", "provider": "simple-icons", "id": "canva" },
+        { "label": "Notion", "provider": "simple-icons", "id": "notion" },
+        {
+          "label": "Microsoft 365",
+          "provider": "skillicons",
+          "id": "microsoft365"
+        },
+        {
+          "label": "Google Workspace",
+          "provider": "null",
+          "id": "google"
+        },
+        {
+          "label": "Google Colab",
+          "provider": "simple-icons",
+          "id": "googlecolab"
+        },
+        { "label": "Trello", "provider": "simple-icons", "id": "trello" },
+        { "label": "Discord", "provider": "simple-icons", "id": "discord" }
       ]
     },
     {
       "icon": "fa-shield-halved",
       "name": "Security",
       "items": [
-        { "label": "Wireshark", "provider": "skillicons", "id": "wireshark" },
-        { "label": "Nmap", "provider": "simple-icons", "id": "nmap" },
+        { "label": "Wireshark", "provider": "simple-icons", "id": "wireshark" },
+        { "label": "Bitbucket", "provider": "simple-icons", "id": "bitbucket" },
+        { "label": "Bash", "provider": "skillicons", "id": "bash" },
         {
-          "label": "Metasploit",
-          "provider": "simple-icons",
-          "id": "metasploit"
+          "label": "Kali Linux",
+          "provider": "skillicons",
+          "id": "kali"
+        },
+        {
+          "label": "Ubuntu",
+          "provider": "skillicons",
+          "id": "ubuntu"
         },
         {
           "label": "Burp Suite",
           "provider": "simple-icons",
           "id": "portswigger"
+        },
+        {
+          "label": "Neovim",
+          "provider": "skillicons",
+          "id": "neovim"
+        },
+        {
+          "label": "Cyberchef",
+          "provider": "null",
+          "id": "cyberchef"
+        },
+        {
+          "label": "IDA",
+          "provider": "null",
+          "id": "ida"
+        },
+        {
+          "label": "Postman",
+          "provider": "skillicons",
+          "id": "postman"
         }
       ]
     }
