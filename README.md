@@ -1,23 +1,17 @@
 # Personal Portfolio (Modular, Data-Driven)
 
+A collection of my software development projects, featuring both individual work and collaborative efforts that showcase my technical expertise and growth as an IT professional.
+
 This portfolio loads all content (about, skills, projects, experience, certificates, contact) dynamically from `data.json` and renders sections via `main.js`.
 
-## Data Model
+## Overview
 
-- profile
-  - name, brand, titleKeywords[], photo, resume, socials[] (platform, url), footerText
-- about
-  - intro, features[] (icon, title, text) — Font Awesome icon class suffix (e.g., `fa-brain`)
-- skills: array of categories { icon, name, items[] }
-  - items can be strings (uses Devicon guess) or objects:
-    - { label, provider, id, className? }
-    - provider: "skillicons" | "simple-icons" | "devicon" (default)
-    - id: icon slug for the provider (e.g., python, javascript, wireshark)
-- projects: { title, description, image, tags[], link }
-- experience: { role, company, period, bullets[] }
-- certificates: { name, issuer, file, year }
-- contact: { email, phone, location }
+This portfolio represents my professional journey in IT, featuring projects that highlight my evolving technical competencies and passion in learning new technologies, analytical problem-solving capabilities, and experience delivering solutions from concept to implementation.
 
-## Run locally
+## Contact
 
-This is a static site. Use any local server so `fetch('data.json')` works.
+Feel free to explore the projects and reach out if you have any questions or would like to discuss potential collaborations.
+
+---
+
+_This portfolio is continuously updated with new projects and improvements._
