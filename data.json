@@ -202,6 +202,68 @@
   "projects": [
     {
       "type": "code",
+      "resource_link": "https://github.com/Arvss07/IT212_9449_AggabaoArvyT.git",
+      "title": "DSA Repo 1 (IT212 - Data Structures and Algorithms)",
+      "description": "A collection of data structures and algorithms implemented in Java.",
+      "image": "https://placehold.co/600x360/8e4a49/ffffff?text=DSA%20Repo%201",
+      "tags": ["Java", "Data Structures", "Algorithms"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://github.com/Arvss07/AggabaoArvy9449IT212MidtermIndividualProject1.git",
+      "title": "DSA Repo 2 (IT212 - Data Structures and Algorithms)",
+      "description": "A collection of data structures and algorithms implemented in Java.",
+      "image": "https://placehold.co/600x360/8e4a49/ffffff?text=DSA%20Repo%202",
+      "tags": ["Java", "Data Structures", "Algorithms"]
+    },
+    {
+      "type": "code",
+      "resource_links": [
+        {
+          "type": "github",
+          "url": "https://github.com/Arvss07/grade-calculator.git",
+          "label": "View Code"
+        },
+        {
+          "type": "live",
+          "url": "https://arvss07.github.io/grade-calculator",
+          "label": "Live Demo"
+        }
+      ],
+      "title": "Grade Calculator",
+      "description": "A simple website that calculates the final GWA of a student based on their grades and units.",
+      "image": "https://placehold.co/600x360/304C89/ffffff?text=Grade%20Calculator",
+      "tags": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://github.com/Arvss07/web-dev-prac.git",
+      "title": "Web Development Practice",
+      "description": "A repository for practicing web development skills.",
+      "image": "https://placehold.co/600x360/6D213C/ffffff?text=Web%20Development%20Practice",
+      "tags": ["HTML", "CSS", "JavaScript", "PHP", "MySQL"]
+    },
+    {
+      "type": "code",
+      "resource_links": [
+        {
+          "type": "github",
+          "url": "https://github.com/Arvss07/Aggabao-Webpage.git",
+          "label": "View Code"
+        },
+        {
+          "type": "live",
+          "url": "https://arvss07.github.io/Aggabao-Webpage/",
+          "label": "Live Demo"
+        }
+      ],
+      "title": "First Portfolio Website",
+      "description": "My first portfolio website created.",
+      "image": "images/projectHeaders/aggabao-webpage.png",
+      "tags": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "type": "code",
       "resource_link": "https://gitlab.com/2231671/gigappimaqt",
       "title": "Gig Application (Java and MySQL Programming)",
       "description": "A platform for live music streaming built with Java, MySQL, and JDBC. Features DAO pattern for database operations and MVC architecture.",
@@ -213,7 +275,7 @@
       "resource_link": "https://gitlab.com/2231671/2024-2_9438-midIntegrators",
       "title": "Creative Corner (Java Networking Project)",
       "description": "This project uses Java RMI Structure following a client-server architecture, allowing users to create art commission with detailed specifications",
-      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Java%20Networking",
+      "image": "https://placehold.co/600x360/7DAA92/ffffff?text=Java%20Networking",
       "tags": ["Java", "Client-Server", "Java Swing"]
     },
     {
@@ -221,7 +283,7 @@
       "resource_link": "https://gitlab.com/2231671/2023-2_9438-Integrators_Java",
       "title": "Boggle Word Game(Java CORBA Project)",
       "description": "A multiplayer word game based on Boggle, built with Java using CORBA architecture and MySQL database. Players compete in timed rounds to form words from random letters, with the first to win three rounds declared the winner.",
-      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Java%20CORBA",
+      "image": "https://placehold.co/600x360/AD8350/ffffff?text=Java%20CORBA",
       "tags": ["Java", "CORBA", "MySQL"]
     },
     {
@@ -232,7 +294,6 @@
       "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Python%20CORBA",
       "tags": ["Python", "omniORBpy", "MySQL"]
     },
-
     {
       "type": "paper",
       "resource_link": "files/NetworkPlan.pdf",
@@ -240,6 +301,47 @@
       "description": "Developed a detailed network infrastructure and basic security plan, including equipment and hardware selection, cost estimation, wiring layouts for all the network equipment, security measures, and space allocation for a hypothetical company building as part of an IT course final project on network fundamentals.",
       "image": "images/projectHeaders/NetPlan.png",
       "tags": ["Network Security", "Research", "Network Architecture", "Cisco"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://github.com/Arvss07/website.git",
+      "title": "PHP Practice",
+      "description": "A practice project for PHP development, focusing on login and registration functionalities with MySQL database integration.",
+      "image": "https://placehold.co/600x360/00A878/ffffff?text=PHP%20Practice",
+      "tags": ["PHP", "Web Development", "Practice"]
+    },
+    {
+      "type": "code",
+      "resource_links": [
+        {
+          "type": "github",
+          "url": "https://github.com/Arvss07/9473-Team2-Prelims.git",
+          "label": "View Code"
+        },
+        {
+          "type": "live",
+          "url": "https://arvss07.github.io/9473-Team2-Prelims/c-sharks/",
+          "label": "Live Demo"
+        }
+      ],
+      "title": "SDG 14 Promotional Website",
+      "description": "A repository dedicated in promoting UNESCO Sustainable Development Goal 14: Life Below Water.",
+      "image": "images/projectHeaders/sdg14.png",
+      "tags": ["HTML", "CSS"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://github.com/Arvss07/playwright-repo-java.git",
+      "title": "Playwright Testing Repo (Java)",
+      "description": "A comprehensive automation testing repository utilizing Microsoft Playwright for Java to perform end-to-end web application testing. Features cross-browser testing capabilities, page object model implementation, and automated UI validation across Chrome, Firefox, and Safari browsers.",
+      "image": "https://placehold.co/600x360/7a28cb/ffffff?text=Java%20-%20Playwright",
+      "tags": [
+        "Java",
+        "Playwright",
+        "Testing",
+        "Automation",
+        "End-to-End Testing"
+      ]
     },
     {
       "type": "paper",
@@ -257,13 +359,63 @@
       "image": "/images/projectHeaders/AIEnhancedCybersec.png",
       "tags": ["Machine Learning", "Cybersecurity", "AI", "Finance"]
     },
-
     {
       "type": "code",
-      "resource_link": "https://github.com/arvss/portfolio-website",
+      "resource_link": "https://github.com/Arvss07/unstuffed-web-mvp.git",
+      "title": "Unstuffed Web MVP - Philippine Startup Competition 9",
+      "description": "Minimum Viable Product (MVP) web application developed for Unstuffed, a startup solution presented at the Philippine Startup Competition 9. Features core functionality and user interface design for the competition pitch.",
+      "image": "images/projectHeaders/unstuffed.png",
+      "tags": ["PSC 9", "MVP", "React", "Vite"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://github.com/Arvss07/b71-LabAct1.git",
+      "title": "Web Systems 2 Prelim Project",
+      "description": "Recreation of SDG 14 Promotional Website with Bootstrap 5, PHP, and MySQL.",
+      "image": "images/projectHeaders/wsat2_prelim.png",
+      "tags": ["Bootstrap", "PHP", "MySQL"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://github.com/Arvss07/python-socket-programming.git",
+      "title": "Python Simple Chat Application",
+      "description": "A simple chat application built with Python using socket programming and Tkinter for the GUI.",
+      "image": "images/projectHeaders/marites_chat.png",
+      "tags": ["Python", "Socket Programming", "Tkinter", "GUI"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://github.com/Arvss07/wsat-act3.git",
+      "title": "Web Systems 2 - Basic Employee Management System",
+      "description": "An application that uses bootstrap datatable. Uses MySQL database to store employee records.",
+      "image": "images/projectHeaders/wsat2_midact3.png",
+      "tags": ["Bootstrap", "MySQL", "PHP"]
+    },
+    {
+      "type": "code",
+      "resource_link": "https://github.com/Arvss07/wsat-final_proj.git",
+      "title": "Web Systems 2 - Shoe Store E-commerce Website",
+      "description": "A Basic web application for a shoe store e-commerce website. Features product listings, role-based authentication, and a shopping cart.",
+      "image": "images/projectHeaders/wsat2_final.png",
+      "tags": ["Bootstrap", "MySQL", "PHP"]
+    },
+    {
+      "type": "code",
+      "resource_links": [
+        {
+          "type": "github",
+          "url": "https://github.com/arvss/portfolio-website",
+          "label": "View Code"
+        },
+        {
+          "type": "live",
+          "url": "https://arvss07.github.io/portfolio-website",
+          "label": "Live Site"
+        }
+      ],
       "title": "Portfolio Website",
       "description": "A portfolio website built with Bootstrap 5, HTML, and vanilla JS featuring dynamic content loading and smooth animations.",
-      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=TBA",
+      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Portfolio",
       "tags": ["HTML", "CSS", "JavaScript", "Bootstrap"]
     },
 

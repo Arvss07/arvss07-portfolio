@@ -82,6 +82,7 @@ const TAG_ICON_MAP = {
   ruby: { provider: "devicon", id: "ruby" },
   cisco: { provider: "simpleicons", id: "cisco" },
   mysql: { provider: "devicon", id: "mysql" },
+  php: { provider: "devicon", id: "php" },
 };
 
 function renderSocials(socials) {
@@ -230,18 +231,67 @@ function renderProjects(projects) {
         return `<span class="project-tag">${html}<span>${t}</span></span>`;
       });
 
-      // Determine resource button based on type and resource_link
-      let resourceButton = "";
-      if (p.resource_link && p.resource_link !== "#") {
+      // Handle both old resource_link and new resource_links formats
+      let resourceButtons = "";
+
+      if (
+        p.resource_links &&
+        Array.isArray(p.resource_links) &&
+        p.resource_links.length > 0
+      ) {
+        // New format: multiple resource links
+        resourceButtons = p.resource_links
+          .map((link) => {
+            if (!link.url || link.url === "#") return "";
+
+            let buttonClass = "resource-btn";
+            let icon = "fas fa-external-link-alt";
+
+            switch (link.type) {
+              case "github":
+                buttonClass += " github-btn";
+                icon = "fab fa-github";
+                break;
+              case "gitlab":
+                buttonClass += " gitlab-btn";
+                icon = "fab fa-gitlab";
+                break;
+              case "live":
+              case "demo":
+                buttonClass += " demo-btn";
+                icon = "fas fa-globe";
+                break;
+              case "pdf":
+              case "document":
+                buttonClass += " pdf-btn";
+                icon = "fas fa-file-pdf";
+                break;
+              default:
+                buttonClass += " external-btn";
+                break;
+            }
+
+            return `
+            <a class="${buttonClass}" href="${
+              link.url
+            }" target="_blank" rel="noopener">
+              <i class="${icon}"></i>
+              <span>${link.label || "View"}</span>
+            </a>
+          `;
+          })
+          .join("");
+      } else if (p.resource_link && p.resource_link !== "#") {
+        // Legacy format: single resource link
         if (p.type === "code") {
-          resourceButton = `
+          resourceButtons = `
             <a class="resource-btn github-btn" href="${p.resource_link}" target="_blank" rel="noopener">
               <i class="fab fa-github"></i>
               <span>View Code</span>
             </a>
           `;
         } else if (p.type === "paper" || p.type === "others") {
-          resourceButton = `
+          resourceButtons = `
             <a class="resource-btn pdf-btn" href="${p.resource_link}" target="_blank" rel="noopener">
               <i class="fas fa-file-pdf"></i>
               <span>View Document</span>
@@ -266,7 +316,7 @@ function renderProjects(projects) {
             <p class="project-desc">${p.description || ""}</p>
             <div class="project-tags">${tags.join(" ")}</div>
             <div class="project-actions">
-              ${resourceButton}
+              ${resourceButtons}
             </div>
           </div>
         </div>

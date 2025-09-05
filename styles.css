@@ -703,6 +703,66 @@ section {
   box-shadow: 0 6px 20px rgba(225, 62, 32, 0.4);
 }
 
+.resource-btn.demo-btn {
+  background: linear-gradient(135deg, var(--color-success), #2ed573);
+  color: white;
+}
+
+.resource-btn.demo-btn:hover {
+  background: linear-gradient(135deg, #2ed573, var(--color-success));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(58, 160, 113, 0.4);
+}
+
+.resource-btn.gitlab-btn {
+  background: linear-gradient(135deg, #fc6d26, #fca326);
+  color: white;
+}
+
+.resource-btn.gitlab-btn:hover {
+  background: linear-gradient(135deg, #fca326, #fc6d26);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(252, 109, 38, 0.4);
+}
+
+.resource-btn.external-btn {
+  background: linear-gradient(
+    135deg,
+    var(--color-info),
+    var(--color-secondary)
+  );
+  color: white;
+}
+
+.resource-btn.external-btn:hover {
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary),
+    var(--color-info)
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(101, 144, 195, 0.4);
+}
+
+/* Multiple buttons layout */
+.project-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .project-actions {
+    flex-direction: column;
+  }
+
+  .resource-btn {
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.8rem;
+  }
+}
+
 .project-card.filtered-out {
   opacity: 0;
   transform: scale(0.8) translateY(20px);
