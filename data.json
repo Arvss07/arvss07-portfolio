@@ -404,12 +404,12 @@
       "resource_links": [
         {
           "type": "github",
-          "url": "https://github.com/arvss/portfolio-website",
+          "url": "https://github.com/Arvss07/arvss07-portfolio",
           "label": "View Code"
         },
         {
           "type": "live",
-          "url": "https://arvss07.github.io/portfolio-website",
+          "url": "https://arvss07.github.io/arvss07-portfolio/",
           "label": "Live Site"
         }
       ],
