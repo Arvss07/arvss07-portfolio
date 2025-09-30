@@ -415,7 +415,7 @@
       ],
       "title": "Portfolio Website",
       "description": "A portfolio website built with Bootstrap 5, HTML, and vanilla JS featuring dynamic content loading and smooth animations.",
-      "image": "https://placehold.co/600x360/0ea5e9/ffffff?text=Portfolio",
+      "image": "images/projectHeaders/personal-portfolio.png",
       "tags": ["HTML", "CSS", "JavaScript", "Bootstrap"]
     },
 
@@ -426,6 +426,52 @@
       "description": "Guide on how I found the bug and got the flag from the hosted instance.",
       "image": "/images/projectHeaders/writeup_photo_stock.png",
       "tags": ["JWT", "Web Exploitation", "Cybersecurity", "API", "Ruby"]
+    },
+    {
+      "type": "code",
+      "resource_links": [
+        {
+          "type": "github",
+          "url": "https://github.com/Arvss07/capstone-admin-official",
+          "label": "View Code"
+        },
+        {
+          "type": "live",
+          "url": "https://admin.taravel.app",
+          "label": "Live Site"
+        }
+      ],
+      "title": "Tara-vel Landing Page",
+      "description": "A landing page for Tara-vel, a public transportation companion app for Cagayan Valley commuters.",
+      "image": "images/projectHeaders/taravel-admin-site.png",
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Redux",
+        "Tailwind CSS (with Radix UI)",
+        "zod",
+        "Firebase",
+        "Cloudinary"
+      ]
+    },
+    {
+      "type": "code",
+      "resource_links": [
+        {
+          "type": "github",
+          "url": "https://github.com/Arvss07/taravel-landing-page",
+          "label": "View Code"
+        },
+        {
+          "type": "live",
+          "url": "https://www.taravel.app",
+          "label": "Live Site"
+        }
+      ],
+      "title": "Tara-vel Landing Page",
+      "description": "A landing page for Tara-vel, a public transportation companion app for Cagayan Valley commuters.",
+      "image": "images/projectHeaders/taravel-landing-page.png",
+      "tags": ["Next.js", "GSAP", "JavaScript", "Tailwind CSS 4 (with DaisyUI)"]
     }
   ],
   "exposure": [
@@ -456,6 +502,12 @@
       "name": "Kaspersky CTF 2025",
       "issuer": "Kaspersky",
       "file": "images/certificates/kaspersky_ctf.png",
+      "year": 2025
+    },
+    {
+      "name": "AI-Powered Future: Mastering Prompt Engineering in Generative AI",
+      "issuer": "Department of Information and Communications Technology (DICT) Region V",
+      "file": "files/MPEG1_ARVY_T_AGGABAO.pdf",
       "year": 2025
     }
   ],
