@@ -409,7 +409,7 @@
         },
         {
           "type": "live",
-          "url": "https://arvss07.github.io/arvss07-portfolio/",
+          "url": "https://arvss07-portfolio.vercel.app/",
           "label": "Live Site"
         }
       ],

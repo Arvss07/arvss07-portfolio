@@ -2,13 +2,6 @@
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
-// Loading overlay fade-out
-window.addEventListener("load", () => {
-  const loader = $("#loadingOverlay");
-  loader?.classList.add("fade-out");
-  setTimeout(() => loader && (loader.style.display = "none"), 500);
-});
-
 // Header shrink on scroll (custom header)
 window.addEventListener("scroll", () => {
   const header = $("#mainHeader");
