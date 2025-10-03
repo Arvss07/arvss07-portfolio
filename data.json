@@ -369,6 +369,14 @@
     },
     {
       "type": "code",
+      "resource_link": "https://github.com/GiovanniL30/aeIluminate-admin",
+      "title": "Aeluminate Admin Dashboard",
+      "description": "A PHP-based admin dashboard for managing users of the Aeluminate platform.",
+      "image": "https://placehold.co/600x360/F54927/ffffff?text=Aeluminate%20Admin%20Dashboard",
+      "tags": ["PHP", "HTML", "Composer"]
+    },
+    {
+      "type": "code",
       "resource_link": "https://github.com/Arvss07/b71-LabAct1.git",
       "title": "Web Systems 2 Prelim Project",
       "description": "Recreation of SDG 14 Promotional Website with Bootstrap 5, PHP, and MySQL.",
