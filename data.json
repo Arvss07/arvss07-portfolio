@@ -509,6 +509,12 @@
       "issuer": "Department of Information and Communications Technology (DICT) Region V",
       "file": "files/MPEG1_ARVY_T_AGGABAO.pdf",
       "year": 2025
+    },
+    {
+      "name": "Intro to Cybersecurity",
+      "issuer": "DICT-ITU DTC Initiative",
+      "file": "files/IntroToCyberSec.pdf",
+      "year": 2025
     }
   ],
   "contact": {
