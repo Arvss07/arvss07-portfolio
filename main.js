@@ -549,83 +549,44 @@ function showCertificateModal(filePath, certificateName) {
 }
 
 function renderContact(contact, socials) {
-  const section = document.getElementById("contact");
-  if (!section) {
-    const footer = document.querySelector("footer");
-    const s = document.createElement("section");
-    s.id = "contact";
-    s.innerHTML = `
-      <div class="container">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="row g-4 justify-content-center">
-          <div class="col-lg-8">
-            <div class="contact-info-card" data-aos="fade-up">
-              <div class="row g-4">
-                <div class="col-md-6">
-                  <div class="contact-item">
-                    <div class="contact-icon">
-                      <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-details">
-                      <h5>Primary Email</h5>
-                      <a href="mailto:${contact.email}">${contact.email}</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="contact-item">
-                    <div class="contact-icon">
-                      <i class="fas fa-envelope-open"></i>
-                    </div>
-                    <div class="contact-details">
-                      <h5>Backup Email</h5>
-                      <a href="mailto:${contact.backup_email}">${
-      contact.backup_email
-    }</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="contact-item">
-                    <div class="contact-icon">
-                      <i class="fas fa-location-dot"></i>
-                    </div>
-                    <div class="contact-details">
-                      <h5>Location</h5>
-                      <p>${contact.location}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Social Media Links -->
-              <div class="social-connect mt-4">
-                <h5 class="text-center mb-3">Follow Me</h5>
-                <div class="social-links d-flex justify-content-center gap-3">
-                  ${socials
-                    .map(
-                      (social) => `
-                    <a href="${
-                      social.url
-                    }" target="_blank" rel="noopener" class="social-btn ${
-                        social.platform
-                      }-btn" aria-label="${social.platform}">
-                      <i class="fab fa-${social.platform}"></i>
-                      <span>${
-                        social.platform.charAt(0).toUpperCase() +
-                        social.platform.slice(1)
-                      }</span>
-                    </a>
-                  `
-                    )
-                    .join("")}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>`;
-    footer.parentNode.insertBefore(s, footer);
+  // Update email links
+  const primaryEmail = $("#primaryEmail");
+  const backupEmail = $("#backupEmail");
+  const locationText = $("#locationText");
+  const socialLinksContainer = $("#socialLinksContainer");
+
+  if (primaryEmail && contact.email) {
+    primaryEmail.textContent = contact.email;
+    primaryEmail.href = `mailto:${contact.email}`;
+  }
+
+  if (backupEmail && contact.backup_email) {
+    backupEmail.textContent = contact.backup_email;
+    backupEmail.href = `mailto:${contact.backup_email}`;
+  }
+
+  if (locationText && contact.location) {
+    locationText.textContent = contact.location;
+  }
+
+  // Populate social links
+  if (socialLinksContainer && socials && socials.length > 0) {
+    socialLinksContainer.innerHTML = socials
+      .map(
+        (social) => `
+        <a href="${social.url}" 
+           target="_blank" 
+           rel="noopener" 
+           class="social-btn ${social.platform}-btn" 
+           aria-label="${social.platform}">
+          <i class="fab fa-${social.platform}"></i>
+          <span>${
+            social.platform.charAt(0).toUpperCase() + social.platform.slice(1)
+          }</span>
+        </a>
+      `
+      )
+      .join("");
   }
 }
 

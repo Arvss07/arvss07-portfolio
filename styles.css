@@ -1566,6 +1566,11 @@ footer .social-icons a:hover {
   flex-shrink: 0;
 }
 
+.contact-details {
+  flex: 1;
+  min-width: 0; /* Important for text overflow to work */
+}
+
 .contact-details h5 {
   color: var(--primary-color);
   margin-bottom: 0.25rem;
@@ -1578,6 +1583,10 @@ footer .social-icons a:hover {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+  display: block;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
 }
 
 .contact-details a:hover {
@@ -1588,6 +1597,8 @@ footer .social-icons a:hover {
   color: var(--dark-text);
   margin-bottom: 0;
   font-weight: 500;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .social-connect {
