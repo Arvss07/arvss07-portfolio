@@ -484,6 +484,34 @@
   ],
   "exposure": [
     {
+      "title": "AI Class Asean",
+      "org": "Asean Foundation with support from Google.org",
+      "period": "2025",
+      "highlights": [
+        "Completed all chapters of the (12-hours) AI learning modules on www.AIClassASEAN.org",
+        "Gained knowledge on the basics of Artificial Intelligence and its applications."
+      ]
+    },
+    {
+      "title": "Hour of Code Webinar",
+      "org": "Department of Information and Communications Technology (DICT) Region II",
+      "period": "2025",
+      "highlights": [
+        "Participated in the Hour of Code event hosted by DICT Region II."
+      ]
+    },
+
+    {
+      "title": "AI-Powered Future: Mastering Prompt Engineering in Generative AI",
+      "org": "Department of Information and Communications Technology (DICT) Region V",
+      "period": "2025",
+      "highlights": [
+        "Participated in the AI-Powered Future event hosted by DICT Region V.",
+        "Gained hands-on experience in prompt engineering and generative AI concepts."
+      ]
+    },
+
+    {
       "title": "Kaspersky CTF 2025",
       "org": "Kaspersky",
       "period": "2025",
@@ -491,8 +519,7 @@
         "Participated in an international competition CTF event hosted by Kaspersky.",
         "Placed 29th out of 716 participants from various schools and organizations across the Asia-Oceania region.",
         "Placed 5th in ranking in the Philippines."
-      ],
-      "file": "images/projectHeaders/kasperskf_ctf_banner.png"
+      ]
     },
     {
       "title": "Trend Micro uCTF Challenge",
@@ -501,27 +528,44 @@
       "highlights": [
         "Participated in the uCTF competition hosted by Trend Micro Philippines.",
         "Placed 56th out of 199 participants from various schools across the Philippines."
-      ],
-      "file": "images/certificates/trendmicro_uctf.jpg"
+      ]
     }
   ],
   "certificates": [
     {
-      "name": "Kaspersky CTF 2025",
+      "name": "AI Class Asean Completion Certificate",
+      "issuer": "Asean Foundation with support from Google.org",
+      "file": "images/certificates/masterclass.png",
+      "year": 2025
+    },
+    {
+      "name": "Hour of Code Webinar Participation Certificate",
+      "issuer": "DICT II & Mr. Allan A. Custodio",
+      "file": "files/HourOfCodeCerts.pdf",
+      "year": 2025
+    },
+    {
+      "name": "Intro to Cybersecurity Completion Certificate",
+      "issuer": "DICT-ITU DTC Initiative",
+      "file": "files/IntroToCyberSec.pdf",
+      "year": 2025
+    },
+    {
+      "name": "AI-Powered Future Participation Certificate",
+      "issuer": "DICT Region V",
+      "file": "files/MPEG1_ARVY_T_AGGABAO.pdf",
+      "year": 2025
+    },
+    {
+      "name": "Kaspersky CTF 2025 Participation Certificate",
       "issuer": "Kaspersky",
       "file": "images/certificates/kaspersky_ctf.png",
       "year": 2025
     },
     {
-      "name": "AI-Powered Future: Mastering Prompt Engineering in Generative AI",
-      "issuer": "Department of Information and Communications Technology (DICT) Region V",
-      "file": "files/MPEG1_ARVY_T_AGGABAO.pdf",
-      "year": 2025
-    },
-    {
-      "name": "Intro to Cybersecurity",
-      "issuer": "DICT-ITU DTC Initiative",
-      "file": "files/IntroToCyberSec.pdf",
+      "name": "Trend Micro uCTF Challenge 2025",
+      "issuer": "Trend Micro",
+      "file": "files/ArvyAggabao_uCTF_CoP.pdf",
       "year": 2025
     }
   ],
