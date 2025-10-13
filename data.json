@@ -449,8 +449,8 @@
           "label": "Live Site"
         }
       ],
-      "title": "Tara-vel Landing Page",
-      "description": "A landing page for Tara-vel, a public transportation companion app for Cagayan Valley commuters.",
+      "title": "Tara-vel Admin Page",
+      "description": "The admin panel for managing Tara-vel functions and users",
       "image": "images/projectHeaders/taravel-admin-site.png",
       "tags": [
         "Next.js",
