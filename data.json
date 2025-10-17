@@ -484,6 +484,16 @@
   ],
   "exposure": [
     {
+      "title": "Hack4Gov 2025",
+      "org": "Department of Information and Communications Technology (DICT) Region II",
+      "period": "2025",
+      "highlights": [
+        "Participated in the Hack4Gov event hosted by DICT Region II.",
+        "Collaborated with my team to find hidden flags in various challenges including web exploitation, forensics, OSINT, and many more.",
+        "Placed 2nd in the overall rankings."
+      ]
+    },
+    {
       "title": "AI Class Asean",
       "org": "Asean Foundation with support from Google.org",
       "period": "2025",
@@ -510,7 +520,6 @@
         "Gained hands-on experience in prompt engineering and generative AI concepts."
       ]
     },
-
     {
       "title": "Kaspersky CTF 2025",
       "org": "Kaspersky",
@@ -532,6 +541,12 @@
     }
   ],
   "certificates": [
+    {
+      "name": "Hack4gov 2025 Participation Certificate & 2nd Place Award",
+      "issuer": "DICT Region V",
+      "file": "images/certificates/h4g.jpg",
+      "year": 2025
+    },
     {
       "name": "AI Class Asean Completion Certificate",
       "issuer": "Asean Foundation with support from Google.org",
