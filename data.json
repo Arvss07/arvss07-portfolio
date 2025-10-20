@@ -542,6 +542,18 @@
   ],
   "certificates": [
     {
+      "name": "Cyber Threat Management Complettion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/CyberThreatManagement_cert.pdf",
+      "year": 2025
+    },
+    {
+      "name": "Introduction to Data Science Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/IntroToDataScience_cert.pdf",
+      "year": 2025
+    },
+    {
       "name": "Hack4gov 2025 Participation Certificate & 2nd Place Award",
       "issuer": "DICT Region V",
       "file": "images/certificates/h4g.jpg",
@@ -561,7 +573,7 @@
     },
     {
       "name": "Intro to Cybersecurity Completion Certificate",
-      "issuer": "DICT-ITU DTC Initiative",
+      "issuer": "Cisco Networking Academy",
       "file": "files/IntroToCyberSec.pdf",
       "year": 2025
     },
