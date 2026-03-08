@@ -780,7 +780,6 @@ html.declassified #status-bar { background: rgba(245, 240, 232, 0.92); }
   object-fit: contain;
   object-position: top;
   display: block;
-  vertical-align: top;
 }
 .showcase-card .showcase-overlay {
   position: absolute;
