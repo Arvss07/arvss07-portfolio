@@ -4,6 +4,7 @@
     "brand": "Arvss",
     "titleKeywords": ["Networking", "Cybersecurity", "Data Analysis"],
     "photo": "images/me.jpg",
+    "aboutPhoto": "images/arvy.png",
     "socials": [
       { "platform": "github", "url": "https://github.com/Arvss07" },
       { "platform": "linkedin", "url": "https://www.linkedin.com/in/arvss07" },
@@ -447,7 +448,7 @@
         },
         {
           "type": "live",
-          "url": "https://admin.taravel.app",
+          "url": "https://capstone-admin-official.vercel.app/",
           "label": "Live Site"
         }
       ],
@@ -474,7 +475,7 @@
         },
         {
           "type": "live",
-          "url": "https://www.taravel.app",
+          "url": "https://taravel-landing-page.vercel.app/",
           "label": "Live Site"
         }
       ],

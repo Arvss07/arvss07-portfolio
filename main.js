@@ -1,156 +1,17 @@
-// Utilities
-const $ = (sel) => document.querySelector(sel);
-const $$ = (sel) => document.querySelectorAll(sel);
+/* DOSSIER SYSTEM — Classified Intelligence Portfolio */
 
-// Header shrink on scroll (custom header)
-window.addEventListener("scroll", () => {
-  const header = $("#mainHeader");
-  header?.classList.toggle("header-scrolled", window.scrollY > 50);
-});
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-// Simple scrollspy for active nav highlighting
-function setupScrollSpy() {
-  const links = Array.from(document.querySelectorAll("#appNav .nav-link"));
-  const targets = links
-    .map((a) => document.querySelector(a.getAttribute("href")))
-    .filter(Boolean);
-
-  const setActive = (id) => {
-    links.forEach((a) => {
-      const match = a.getAttribute("href") === `#${id}`;
-      a.classList.toggle("active", match);
-    });
-    positionActivePill();
-  };
-
-  const onScroll = () => {
-    const offset = 120; // account for navbar height
-    let currentId = null;
-    for (const sec of targets) {
-      const rect = sec.getBoundingClientRect();
-      if (rect.top - offset <= 0 && rect.bottom > offset) {
-        currentId = sec.id;
-      }
-    }
-    if (currentId) setActive(currentId);
-  };
-
-  window.addEventListener("scroll", onScroll);
-  onScroll();
+function normalizePath(path) {
+  if (!path || typeof path !== "string") return "";
+  return path.replace(/^\//, "");
 }
 
-// Animate in view with IntersectionObserver
-const io = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add("in-view");
-      } else {
-        e.target.classList.remove("in-view");
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
-
-function observeAll(container) {
-  container?.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
-}
-
-// Render helpers
-// Optional icon map for project tags
-const TAG_ICON_MAP = {
-  html: { provider: "devicon", id: "html5" },
-  css: { provider: "devicon", id: "css3" },
-  javascript: { provider: "devicon", id: "javascript" },
-  typescript: { provider: "devicon", id: "typescript" },
-  python: { provider: "devicon", id: "python" },
-  gitlab: { provider: "simple-icons", id: "gitlab" },
-  node: { provider: "devicon", id: "nodejs" },
-  react: { provider: "devicon", id: "react" },
-  bootstrap: { provider: "devicon", id: "bootstrap" },
-  git: { provider: "devicon", id: "git" },
-  java: { provider: "devicon", id: "java" },
-  javascript: { provider: "devicon", id: "javascript" },
-  ruby: { provider: "devicon", id: "ruby" },
-  cisco: { provider: "simpleicons", id: "cisco" },
-  mysql: { provider: "devicon", id: "mysql" },
-  php: { provider: "devicon", id: "php" },
-};
-
-function renderSocials(socials) {
-  return socials
-    .map(
-      (s) =>
-        `<a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.platform}"><i class="fab fa-${s.platform}"></i></a>`
-    )
-    .join("");
-}
-
-function renderAbout(about) {
-  $("#aboutIntro").textContent = about.intro;
-  const wrap = $("#aboutFeatures");
-  wrap.innerHTML = about.features
-    .map(
-      (f) => `
-      <div class="col-lg-4 col-md-6 col-sm-12" data-reveal>
-        <div class="feature-card" data-aos="zoom-in">
-          <div class="feature-icon-wrapper">
-            <i class="fas ${f.icon}"></i>
-          </div>
-          <div class="feature-content">
-            <h3>${f.title}</h3>
-            <p>${f.text}</p>
-          </div>
-        </div>
-      </div>`
-    )
-    .join("");
-  observeAll(wrap);
-}
-
-function renderEducation(education) {
-  const grid = $("#educationGrid");
-  if (!grid) return;
-
-  grid.innerHTML = education
-    .map(
-      (edu) => `
-      <div class="col-lg-4 col-md-6" data-reveal>
-        <div class="education-card" data-aos="fade-up">
-          <div class="education-header">
-            <div class="education-logo-wrapper">
-              <img src="${edu.school_logo_url}" alt="${
-        edu.school
-      } Logo" class="education-logo" />
-            </div>
-            <div class="education-level">
-              ${
-                edu.education === "college"
-                  ? "College"
-                  : edu.education === "senior_high"
-                  ? "Senior High"
-                  : "Junior High"
-              }
-            </div>
-          </div>
-          <div class="education-body">
-            <h4 class="education-school">${edu.school}</h4>
-            <p class="education-location">
-              <i class="fas fa-map-marker-alt"></i>
-              ${edu.location}
-            </p>
-            <p class="education-course">${edu.course_strand}</p>
-            <div class="education-date">
-              <i class="fas fa-calendar-alt"></i>
-              ${edu.date_graduated}
-            </div>
-          </div>
-        </div>
-      </div>`
-    )
-    .join("");
-  observeAll(grid);
+function credlyBadgeName(path) {
+  const base = path.split("/").pop() || "";
+  const name = base.replace(/\.[^.]+$/, "").replace(/-/g, " ");
+  return name.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 function skillIconHTML(item) {
@@ -158,763 +19,883 @@ function skillIconHTML(item) {
   const label = isObj ? item.label : String(item);
   const provider = (isObj ? item.provider : "devicon") || "devicon";
   const id = (isObj ? item.id : label) || "";
-  const normId = String(id)
-    .toLowerCase()
-    .replace(/\+/g, "plus")
-    .replace(/\s+/g, "");
+  const normId = String(id).toLowerCase().replace(/\+/g, "plus").replace(/\s+/g, "");
 
   if (provider === "skillicons") {
-    return `<img class="skill-icon" src="https://skillicons.dev/icons?i=${encodeURIComponent(
-      normId
-    )}" alt="${label}" loading="lazy"/>`;
+    return `<img class="arsenal-icon" src="https://skillicons.dev/icons?i=${encodeURIComponent(normId)}" alt="${label}" loading="lazy"/>`;
   }
   if (provider === "simple-icons") {
-    return `<img class="skill-icon" src="https://cdn.simpleicons.org/${encodeURIComponent(
-      normId
-    )}" alt="${label}" loading="lazy"/>`;
+    return `<img class="arsenal-icon" src="https://cdn.simpleicons.org/${encodeURIComponent(normId)}" alt="${label}" loading="lazy"/>`;
   }
-  // devicon as default
-  const className =
-    isObj && item.className
-      ? item.className
-      : `devicon-${normId}-plain colored`;
-  return `<i class="${className}" title="${label}"></i>`;
+  if (provider === "devicon") {
+    return `<i class="devicon-${normId}-plain colored arsenal-icon"></i>`;
+  }
+  return `<i class="fas fa-cube arsenal-icon"></i>`;
 }
 
-function renderSkills(skills) {
-  const grid = $("#skillsGrid");
-  grid.innerHTML = skills
-    .map((cat) => {
-      const items = (cat.items || [])
-        .map(
-          (s) => `
-            <div class="skill-chip" title="${
-              typeof s === "object" ? s.label : s
-            }">
-              ${skillIconHTML(s)}
-              <span>${typeof s === "object" ? s.label : s}</span>
-            </div>`
-        )
-        .join("");
-      return `
-      <div class="col-lg-4" data-reveal>
-        <div class="skill-category" data-aos="fade-up">
-          <h3><i class="fas ${cat.icon}"></i> ${cat.name}</h3>
-          <div class="skills-wrap">${items}</div>
-        </div>
-      </div>`;
-    })
-    .join("");
-  observeAll(grid);
+const TYPE_ICONS = {
+  code: "fa-terminal",
+  paper: "fa-file-alt",
+  others: "fa-puzzle-piece",
+};
+
+// ---------- Boot sequence ----------
+function triggerBootSequence(data) {
+  const boot = $("#boot");
+  const app = $("#app");
+  const bar = $(".boot-progress-bar", boot);
+  const lines = $$(".boot-line", boot);
+  const name = data.profile?.name || "SUBJECT";
+  const brand = data.profile?.brand || "N/A";
+
+  const logTexts = [
+    `> Loading dossier system...`,
+    `> Subject: ${name}`,
+    `> Alias: ${brand}`,
+    `> Verifying clearance...`,
+    `> Access granted.`,
+  ];
+
+  let step = 0;
+  const totalSteps = 5;
+  const stepDuration = 3400 / totalSteps;
+
+  function next() {
+    if (step < totalSteps) {
+      if (step < lines.length) {
+        lines[step].textContent = logTexts[step];
+        lines[step].classList.add("visible");
+      }
+      step++;
+      bar.style.width = `${(step / totalSteps) * 100}%`;
+      setTimeout(next, stepDuration);
+    } else {
+      boot.classList.add("done");
+      app.style.opacity = "1";
+    }
+  }
+
+  setTimeout(next, 400);
 }
-function renderProjects(projects) {
-  const grid = $("#projectsGrid");
 
-  // Reverse the projects array so the last item appears first
-  const reversedProjects = [...projects].reverse();
+// ---------- Canvas node graph ----------
+function initCanvas() {
+  const canvas = $("#bg-canvas");
+  if (!canvas) return;
 
-  grid.innerHTML = reversedProjects
-    .map((p, idx) => {
-      const tags = (p.tags || []).map((t) => {
-        const key = String(t).toLowerCase();
-        const meta = TAG_ICON_MAP[key] || null;
-        const html = meta
-          ? skillIconHTML({ provider: meta.provider, id: meta.id, label: t })
-          : "";
-        return `<span class="project-tag">${html}<span>${t}</span></span>`;
+  const ctx = canvas.getContext("2d");
+  const nodeCount = 80;
+  const proximity = 150;
+  const nodeRadius = 2;
+  let nodes = [];
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    initNodes();
+  }
+
+  function initNodes() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    nodes = [];
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
       });
+    }
+  }
 
-      // Handle both old resource_link and new resource_links formats
-      let resourceButtons = "";
+  function tick() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    ctx.clearRect(0, 0, w, h);
 
-      if (
-        p.resource_links &&
-        Array.isArray(p.resource_links) &&
-        p.resource_links.length > 0
-      ) {
-        // New format: multiple resource links
-        resourceButtons = p.resource_links
-          .map((link) => {
-            if (!link.url || link.url === "#") return "";
+    nodes.forEach((n) => {
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1;
+      if (n.y < 0 || n.y > h) n.vy *= -1;
+      n.x = Math.max(0, Math.min(w, n.x));
+      n.y = Math.max(0, Math.min(h, n.y));
+    });
 
-            let buttonClass = "resource-btn";
-            let icon = "fas fa-external-link-alt";
-
-            switch (link.type) {
-              case "github":
-                buttonClass += " github-btn";
-                icon = "fab fa-github";
-                break;
-              case "gitlab":
-                buttonClass += " gitlab-btn";
-                icon = "fab fa-gitlab";
-                break;
-              case "live":
-              case "demo":
-                buttonClass += " demo-btn";
-                icon = "fas fa-globe";
-                break;
-              case "pdf":
-              case "document":
-                buttonClass += " pdf-btn";
-                icon = "fas fa-file-pdf";
-                break;
-              default:
-                buttonClass += " external-btn";
-                break;
-            }
-
-            return `
-            <a class="${buttonClass}" href="${
-              link.url
-            }" target="_blank" rel="noopener">
-              <i class="${icon}"></i>
-              <span>${link.label || "View"}</span>
-            </a>
-          `;
-          })
-          .join("");
-      } else if (p.resource_link && p.resource_link !== "#") {
-        // Legacy format: single resource link
-        if (p.type === "code") {
-          resourceButtons = `
-            <a class="resource-btn github-btn" href="${p.resource_link}" target="_blank" rel="noopener">
-              <i class="fab fa-github"></i>
-              <span>View Code</span>
-            </a>
-          `;
-        } else if (p.type === "paper" || p.type === "others") {
-          resourceButtons = `
-            <a class="resource-btn pdf-btn" href="${p.resource_link}" target="_blank" rel="noopener">
-              <i class="fas fa-file-pdf"></i>
-              <span>View Document</span>
-            </a>
-          `;
+    ctx.strokeStyle = "rgba(74, 144, 217, 0.12)";
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[j].x - nodes[i].x;
+        const dy = nodes[j].y - nodes[i].y;
+        if (dx * dx + dy * dy < proximity * proximity) {
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
         }
       }
+    }
+
+    ctx.fillStyle = "rgba(74, 144, 217, 0.35)";
+    nodes.forEach((n) => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, nodeRadius, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(tick);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+  tick();
+}
+
+// ---------- Custom cursor ----------
+function initCursor() {
+  const ring = $("#cursorRing");
+  const dot = $("#cursorDot");
+  if (!ring || !dot) return;
+
+  let x = 0, y = 0;
+  let ringX = 0, ringY = 0;
+  const lerp = 0.12;
+
+  document.addEventListener("mousemove", (e) => { x = e.clientX; y = e.clientY; });
+
+  const hoverSelectors = "a, button, [role='button'], .project-card, .cert-card, .badge-tile, .arsenal-tile, .showcase-card";
+  document.addEventListener("mouseover", (e) => {
+    if (e.target.closest(hoverSelectors)) ring.classList.add("hover");
+  });
+  document.addEventListener("mouseout", (e) => {
+    if (!e.target.closest(hoverSelectors)) ring.classList.remove("hover");
+  });
+
+  function update() {
+    ringX += (x - ringX) * lerp;
+    ringY += (y - ringY) * lerp;
+    ring.style.left = ringX + "px";
+    ring.style.top = ringY + "px";
+    dot.style.left = x + "px";
+    dot.style.top = y + "px";
+    requestAnimationFrame(update);
+  }
+  update();
+}
+
+// ---------- Sidebar ----------
+function renderSidebar(data) {
+  const profile = data.profile || {};
+  $(".sidebar-subject-name").textContent = profile.name || "SUBJECT";
+  $(".sidebar-brand").textContent = profile.brand || "";
+
+  const nav = $("#sidebarNav");
+  const sections = [
+    { id: "section-hero", label: "SUBJECT FILE" },
+    { id: "section-stats", label: "STATS" },
+    { id: "section-about", label: "PROFILE" },
+    { id: "section-education", label: "TIMELINE" },
+    { id: "section-skills", label: "ARSENAL" },
+    { id: "section-projects", label: "PROJECTS" },
+    { id: "section-operations", label: "OPERATIONS" },
+    { id: "section-certificates", label: "CERTIFICATES" },
+    { id: "section-contact", label: "CONTACT" },
+  ];
+  nav.innerHTML = sections
+    .map((s) => `<a href="#${s.id}" class="sidebar-link">${s.label}</a>`)
+    .join("");
+
+  const filters = $("#sidebarFilters");
+  filters.innerHTML = `
+    <button type="button" class="filter-btn active" data-filter="all"><i class="fas fa-layer-group"></i> All</button>
+    <button type="button" class="filter-btn" data-filter="code"><i class="fas fa-terminal"></i> Code</button>
+    <button type="button" class="filter-btn" data-filter="paper"><i class="fas fa-file-alt"></i> Paper</button>
+    <button type="button" class="filter-btn" data-filter="others"><i class="fas fa-puzzle-piece"></i> Others</button>
+  `;
+}
+
+function initSidebarToggle() {
+  const toggle = $("#sidebarToggle");
+  const sidebar = $("#sidebar");
+  if (toggle && sidebar) {
+    toggle.addEventListener("click", () => sidebar.classList.toggle("open"));
+  }
+}
+
+// ---------- Dark / Light mode ----------
+function initDarkLightToggle() {
+  const btn = $("#darkLightToggle");
+  if (!btn) return;
+  const saved = localStorage.getItem("dossier-theme");
+  if (saved === "declassified") document.documentElement.classList.add("declassified");
+  updateToggleLabel(btn);
+
+  btn.addEventListener("click", () => {
+    const root = document.documentElement;
+    root.classList.add("declassified-transition");
+    root.classList.toggle("declassified");
+    const isDeclassified = root.classList.contains("declassified");
+    localStorage.setItem("dossier-theme", isDeclassified ? "declassified" : "classified");
+    updateToggleLabel(btn);
+    setTimeout(() => root.classList.remove("declassified-transition"), 480);
+  });
+}
+
+function updateToggleLabel(btn) {
+  const isDeclassified = document.documentElement.classList.contains("declassified");
+  btn.innerHTML = isDeclassified
+    ? '<i class="fas fa-sun"></i> DECLASSIFIED'
+    : '<i class="fas fa-moon"></i> CLASSIFIED';
+}
+
+// ---------- Back to top ----------
+function initBackToTop() {
+  const btn = $("#backToTop");
+  if (!btn) return;
+  window.addEventListener("scroll", () => {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    btn.classList.toggle("visible", scrollTop > 400);
+  });
+  btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+}
+
+// ---------- Status bar ----------
+function renderStatusBar(data) {
+  const profile = data.profile || {};
+  const contact = data.contact || {};
+  $(".status-bar-name").textContent = profile.name || "";
+  $(".status-bar-location").textContent = contact.location || "";
+  updateClock();
+  setInterval(updateClock, 1000);
+}
+
+function updateClock() {
+  const el = $("#liveClock");
+  if (!el) return;
+  const now = new Date();
+  el.textContent = now.toLocaleTimeString("en-US", { hour12: false });
+  el.setAttribute("datetime", now.toISOString());
+}
+
+// ---------- Clearance progress ----------
+function initClearanceBar() {
+  const fill = $(".clearance-fill");
+  if (!fill) return;
+  function update() {
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop;
+    const scrollHeight = doc.scrollHeight - doc.clientHeight;
+    const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+    fill.style.width = pct + "%";
+  }
+  window.addEventListener("scroll", update);
+  update();
+}
+
+// ---------- Scroll spy with progress dots ----------
+function initScrollSpy() {
+  const links = $$("#sidebarNav .sidebar-link");
+  const sections = links.map((a) => $(a.getAttribute("href"))).filter(Boolean);
+
+  function update() {
+    const offset = 120;
+    let currentId = null;
+    let currentIdx = -1;
+    for (let i = 0; i < sections.length; i++) {
+      const rect = sections[i].getBoundingClientRect();
+      if (rect.top - offset <= 0 && rect.bottom > offset) {
+        currentId = sections[i].id;
+        currentIdx = i;
+      }
+    }
+    links.forEach((a, i) => {
+      const match = a.getAttribute("href") === `#${currentId}`;
+      a.classList.toggle("active", !!match);
+      a.classList.toggle("visited", i < currentIdx);
+    });
+  }
+  window.addEventListener("scroll", update);
+  update();
+}
+
+// ---------- IntersectionObserver ----------
+function initObservers() {
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add("in-view");
+      });
+    },
+    { rootMargin: "0px 0px 80px 0px", threshold: 0 }
+  );
+  $$(".content-section").forEach((el) => sectionObserver.observe(el));
+
+  const tileObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add("in-view");
+      });
+    },
+    { threshold: 0.15 }
+  );
+  $$(".arsenal-category").forEach((el) => tileObserver.observe(el));
+}
+
+// ---------- Hero ----------
+function renderHero(profile) {
+  const name = profile?.name || "Subject";
+  const parts = name.split(" ");
+  const first = parts[0] || name;
+  const last = parts.slice(1).join(" ") || "";
+  const initials = (first[0] || "") + (last[0] || "");
+
+  const keywords = profile?.titleKeywords || [];
+  const photo = normalizePath(profile?.photo) || "images/me.jpg";
+  const resume = profile?.resume || "#";
+  const cv = profile?.cv || "#";
+  const tags = keywords.slice(0, 3);
+
+  return `
+    <section id="section-hero" class="content-section">
+      <div class="hero-left">
+        <p class="hero-eyebrow">CLASSIFIED — SUBJECT FILE <span class="cursor-blink"></span></p>
+        <div class="hero-name-wrap">
+          <span class="hero-ghost-initials">${initials}</span>
+          <span class="hero-name-first">${first}</span>
+          <span class="hero-name-last">${last}</span>
+        </div>
+        <div class="hero-typewriter-wrap"><span id="typewriterText"></span></div>
+        <div class="hero-tags">${tags.map((t) => `<span class="hero-tag">${t}</span>`).join("")}</div>
+        <div class="hero-ctas">
+          <a href="${resume}" class="hero-cta primary" target="_blank" rel="noopener"><i class="fas fa-download"></i> Resume</a>
+          <a href="#section-contact" class="hero-cta"><i class="fas fa-satellite-dish"></i> Contact</a>
+          ${cv ? `<a href="${cv}" class="hero-cta" target="_blank" rel="noopener"><i class="fas fa-id-card"></i> CV</a>` : ""}
+        </div>
+      </div>
+      <div class="subject-file-card">
+        <div class="card-image-wrap"><img src="${photo}" alt="Subject" /></div>
+        <div class="card-meta">
+          <div class="meta-row"><span class="meta-key">ALIAS</span><span class="meta-val">${profile?.brand || "—"}</span></div>
+          <div class="meta-row"><span class="meta-key">STATUS</span><span class="meta-val">ACTIVE</span></div>
+        </div>
+        <span class="stamp">ACTIVE CLEARANCE</span>
+      </div>
+    </section>
+  `;
+}
+
+function initTypewriter(keywords) {
+  const el = $("#typewriterText");
+  if (!el || !keywords.length) return;
+  let idx = 0;
+  let charIdx = 0;
+  let direction = 1;
+  const speed = 80;
+
+  function tick() {
+    const word = keywords[idx] || "";
+    if (direction === 1) {
+      charIdx++;
+      el.textContent = word.slice(0, charIdx);
+      if (charIdx >= word.length) { direction = -1; setTimeout(tick, 1200); return; }
+    } else {
+      charIdx--;
+      el.textContent = word.slice(0, charIdx);
+      if (charIdx <= 0) { direction = 1; idx = (idx + 1) % keywords.length; }
+    }
+    setTimeout(tick, direction === 1 ? speed : 40);
+  }
+  setTimeout(tick, 500);
+}
+
+// ---------- Stats ----------
+function renderStats(data) {
+  const projects = (data.projects || []).length;
+  const certs = (data.certificates || []).length;
+  const badges = (data.credly_badges || []).length;
+  const skillsTotal = (data.skills || []).reduce((acc, s) => acc + (s.items || []).length, 0);
+
+  return `
+    <section id="section-stats" class="content-section">
+      <div class="stat-cell"><span class="stat-number">${projects}<sup>+</sup></span><span class="stat-label">PROJECTS</span></div>
+      <div class="stat-cell"><span class="stat-number">${certs}<sup>&times;</sup></span><span class="stat-label">CERTIFICATES</span></div>
+      <div class="stat-cell"><span class="stat-number">${badges}<sup>&check;</sup></span><span class="stat-label">BADGES</span></div>
+      <div class="stat-cell"><span class="stat-number">${skillsTotal}<sup>&infin;</sup></span><span class="stat-label">ARSENAL</span></div>
+    </section>
+  `;
+}
+
+// ---------- About / Personnel File ----------
+function renderAbout(about, profile, contact) {
+  if (!about) return "";
+  const intro = about.intro || "";
+  const paragraphs = intro.split(/\n\n+/).filter(Boolean);
+  const introHtml = paragraphs.length ? paragraphs.map((p) => `<p>${p}</p>`).join("") : `<p>${intro}</p>`;
+  const features = about.features || [];
+  const name = profile?.name || "SUBJECT";
+  const brand = profile?.brand || "—";
+  const photo = normalizePath(profile?.aboutPhoto) || "images/arvy.png";
+  const location = contact?.location || "—";
+
+  const findingsHtml = features
+    .map((f) => `
+      <div class="pf-finding">
+        <div class="pf-finding-icon"><i class="fas ${f.icon || "fa-circle"}"></i></div>
+        <div>
+          <div class="pf-finding-title">${f.title || ""}</div>
+          <p class="pf-finding-text">${f.text || ""}</p>
+        </div>
+      </div>
+    `)
+    .join("");
+
+  return `
+    <section id="section-about" class="content-section">
+      <div class="pf-header">
+        <span class="pf-stamp">CLASSIFIED</span>
+        <span class="pf-header-title">PERSONNEL FILE: ${name.toUpperCase()}</span>
+      </div>
+      <div class="pf-id-row">
+        <div class="pf-photo-wrap"><img src="${photo}" alt="Subject" /></div>
+        <div class="pf-meta-grid">
+          <div class="pf-meta-item"><span class="pf-meta-key">DESIGNATION</span><span class="pf-meta-val">${brand}</span></div>
+          <div class="pf-meta-item"><span class="pf-meta-key">STATUS</span><span class="pf-meta-val">Active</span></div>
+          <div class="pf-meta-item"><span class="pf-meta-key">LOCATION</span><span class="pf-meta-val">${location}</span></div>
+          <div class="pf-meta-item"><span class="pf-meta-key">CLEARANCE</span><span class="pf-meta-val">Level 4</span></div>
+        </div>
+      </div>
+      <div class="pf-assessment">
+        <p class="pf-assessment-label">SUBJECT ASSESSMENT</p>
+        <div class="pf-assessment-body">${introHtml}</div>
+      </div>
+      <div class="pf-findings">
+        <p class="pf-findings-label">CAPABILITY FINDINGS</p>
+        <div class="pf-findings-grid">${findingsHtml}</div>
+      </div>
+    </section>
+  `;
+}
+
+// ---------- Skills / Arsenal Inventory ----------
+function renderSkills(skills) {
+  const list = skills || [];
+  let tileIdx = 0;
+  const groupsHtml = list
+    .map((cat) => {
+      const tilesHtml = (cat.items || [])
+        .map((item) => {
+          const label = typeof item === "object" ? item.label : item;
+          const icon = skillIconHTML(item);
+          const idx = tileIdx++;
+          return `<div class="arsenal-tile" style="--i:${idx % 12}">
+            ${icon}
+            <span class="arsenal-label">${label}</span>
+          </div>`;
+        })
+        .join("");
+      return `
+        <div class="arsenal-category">
+          <h3 class="arsenal-cat-title"><i class="fas ${cat.icon || "fa-code"}"></i> ${cat.name || ""}</h3>
+          <div class="arsenal-grid">${tilesHtml}</div>
+        </div>
+      `;
+    })
+    .join("");
+
+  return `
+    <section id="section-skills" class="content-section">
+      <p class="section-label">ARSENAL</p>
+      <h2 class="section-title">Skills and Technology</h2>
+      ${groupsHtml}
+    </section>
+  `;
+}
+
+// ---------- Projects / Case Files ----------
+function getShowcaseCardHtml(p) {
+  const type = p.type || "code";
+  const imgSrc = normalizePath(p.image) || "";
+  const title = p.title || "Untitled";
+  const link = (p.resource_links && p.resource_links.length)
+    ? (p.resource_links.find((l) => l.url) || {}).url || "#"
+    : p.resource_link || "#";
+  return `<a href="${link}" class="showcase-card" target="_blank" rel="noopener" title="${title}">
+    <img src="${imgSrc}" alt="" loading="lazy" />
+    <span class="showcase-type type-${type}">${type.toUpperCase()}</span>
+    <div class="showcase-overlay">
+      <span class="showcase-title">${title}</span>
+    </div>
+  </a>`;
+}
+
+function renderShowcaseCarousel(projects) {
+  const raw = projects || [];
+  const latest = raw.slice(-5).reverse();
+  if (!latest.length) return '<div class="showcase-carousel"><div class="showcase-track"></div></div>';
+  const slidesHtml = latest
+    .map((p) => `<div class="showcase-slide">${getShowcaseCardHtml(p)}</div>`)
+    .join("");
+  const dotsHtml = latest
+    .map((_, i) => `<button type="button" class="showcase-dot ${i === 0 ? "active" : ""}" data-index="${i}" aria-label="Slide ${i + 1}"></button>`)
+    .join("");
+  return `
+  <div class="showcase-carousel">
+    <div class="showcase-track">${slidesHtml}</div>
+    <div class="showcase-dots">${dotsHtml}</div>
+  </div>`;
+}
+
+function renderProjects(projects) {
+  const list = (projects || []).slice().reverse();
+  const showcaseHtml = renderShowcaseCarousel(projects);
+
+  const cardsHtml = list
+    .map((p) => {
+      const type = p.type || "code";
+      const imgSrc = normalizePath(p.image) || "";
+      const span2 = p.resource_links && p.resource_links.length > 1;
+      const typeIcon = TYPE_ICONS[type] || "fa-folder";
+      const links = p.resource_links && p.resource_links.length
+        ? p.resource_links
+            .filter((l) => l.url)
+            .map((l) => `<a href="${l.url}" class="card-link" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> ${l.label || "Open File"}</a>`)
+            .join("")
+        : p.resource_link
+        ? `<a href="${p.resource_link}" class="card-link" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Open File</a>`
+        : "";
+      const tagsHtml = (p.tags || []).map((t) => `<span class="card-tag">${t}</span>`).join("");
 
       return `
-      <div class="col-lg-4 col-md-6 project-item" data-reveal data-type="${
-        p.type
-      }">
-        <div class="project-card" data-aos="fade-up" data-project>
-          <div class="project-head" role="button" aria-expanded="false" tabindex="0">
-            <img src="${p.image}" alt="${p.title}" />
-            <div class="project-title">${p.title}</div>
-            <button class="project-toggle" aria-label="Toggle details" aria-expanded="false">
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
-          </div>
-          <div class="project-body" id="proj-body-${idx}">
-            <p class="project-desc">${p.description || ""}</p>
-            <div class="project-tags">${tags.join(" ")}</div>
-            <div class="project-actions">
-              ${resourceButtons}
+      <article class="project-card ${span2 ? "span2" : ""}" data-type="${type}">
+        <div class="folder-tab type-${type}"><i class="fas ${typeIcon}"></i> ${type.toUpperCase()}</div>
+        <div class="classified-watermark">CLASSIFIED</div>
+        ${imgSrc ? `<div class="card-image-wrap"><img src="${imgSrc}" alt="" loading="lazy" /></div>` : ""}
+        <div class="card-inner">
+          <div class="card-type-badge type-${type}"><i class="fas ${typeIcon}"></i> ${type.toUpperCase()}</div>
+          <h3 class="card-title">${p.title || "Untitled"}</h3>
+          <p class="card-desc">${p.description || ""}</p>
+          <div class="card-tags">${tagsHtml}</div>
+          <div class="card-links">${links}</div>
+        </div>
+      </article>
+    `;
+    })
+    .join("");
+
+  return `
+    <section id="section-projects" class="content-section">
+      <p class="section-label">PROJECTS</p>
+      <h2 class="section-title">Projects</h2>
+      <p class="showcase-label"><i class="fas fa-star"></i> LATEST OPERATIONS</p>
+      ${showcaseHtml}
+      <div class="filter-row">
+        <button type="button" data-filter="all" class="active"><i class="fas fa-layer-group"></i> All</button>
+        <button type="button" data-filter="code"><i class="fas fa-terminal"></i> Code</button>
+        <button type="button" data-filter="paper"><i class="fas fa-file-alt"></i> Paper</button>
+        <button type="button" data-filter="others"><i class="fas fa-puzzle-piece"></i> Others</button>
+      </div>
+      <div class="projects-grid">${cardsHtml}</div>
+    </section>
+  `;
+}
+
+function applyProjectFilter(filter) {
+  const buttons = $$("#section-projects .filter-row button");
+  const sidebarBtns = $$("#sidebarFilters .filter-btn");
+  const cards = $$(".project-card");
+  buttons.forEach((b) => b.classList.toggle("active", b.getAttribute("data-filter") === filter));
+  sidebarBtns.forEach((b) => b.classList.toggle("active", b.getAttribute("data-filter") === filter));
+  cards.forEach((card) => {
+    const type = card.getAttribute("data-type");
+    card.classList.toggle("hidden", filter !== "all" && type !== filter);
+  });
+  document.getElementById("section-projects")?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function initProjectFilters() {
+  const filterRow = $("#section-projects .filter-row");
+  if (!filterRow) return;
+  $$("button", filterRow).forEach((btn) => {
+    btn.addEventListener("click", () => applyProjectFilter(btn.getAttribute("data-filter")));
+  });
+  $$("#sidebarFilters .filter-btn").forEach((btn) => {
+    btn.addEventListener("click", () => applyProjectFilter(btn.getAttribute("data-filter")));
+  });
+  $$("#sidebarNav a").forEach((a) => {
+    a.addEventListener("click", () => $("#sidebar")?.classList.remove("open"));
+  });
+}
+
+function initShowcaseCarousel() {
+  const carousel = $(".showcase-carousel");
+  const track = carousel?.querySelector(".showcase-track");
+  const dots = carousel ? $$(".showcase-dot", carousel) : [];
+  const slides = track ? track.querySelectorAll(".showcase-slide") : [];
+  const N = slides.length;
+  if (!track || N === 0) return;
+  let currentIndex = 0;
+  let autoTimer = null;
+
+  function goTo(index) {
+    currentIndex = (index + N) % N;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle("active", i === currentIndex));
+  }
+
+  function startAuto() {
+    stopAuto();
+    autoTimer = setInterval(() => goTo(currentIndex + 1), 4000);
+  }
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  }
+
+  carousel.addEventListener("mouseenter", stopAuto);
+  carousel.addEventListener("mouseleave", startAuto);
+
+  dots.forEach((d) =>
+    d.addEventListener("click", (e) => {
+      e.preventDefault();
+      goTo(parseInt(d.getAttribute("data-index") || "0", 10));
+      startAuto();
+    })
+  );
+
+  startAuto();
+}
+
+// ---------- Certificates & Badges ----------
+function renderCertificates(certificates, credlyBadges) {
+  const certs = certificates || [];
+  const certCards = certs
+    .map((c) => {
+      const file = c.file || "";
+      const isImage = /\.(jpg|jpeg|png|gif|webp)$/i.test(file);
+      const imgSrc = isImage ? normalizePath(file) : "";
+      const imgHtml = imgSrc
+        ? `<img src="${imgSrc}" alt="${(c.name || "").slice(0, 50)}" loading="lazy" />`
+        : `<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:2rem;"><i class="fas fa-file-pdf"></i></div>`;
+      const viewLink = file ? `<span class="cert-link"><i class="fas fa-eye"></i> View</span>` : "";
+      const inner = `
+        <div class="cert-image-wrap">${imgHtml}</div>
+        <div class="cert-body">
+          <h4 class="cert-name">${c.name || "Certificate"}</h4>
+          <p class="cert-issuer">${c.issuer || ""}</p>
+          <span class="cert-year">${c.year || ""}</span>
+          ${viewLink}
+        </div>
+      `;
+      if (file) {
+        return `<a href="${normalizePath(file)}" class="cert-card cert-card-link" target="_blank" rel="noopener">${inner}</a>`;
+      }
+      return `<div class="cert-card">${inner}</div>`;
+    })
+    .join("");
+
+  const badges = credlyBadges || [];
+  const singleSet = badges
+    .map((path) => `
+    <div class="badge-tile">
+      <img src="${path}" alt="" loading="lazy" />
+      <span class="badge-name">${credlyBadgeName(path)}</span>
+    </div>`)
+    .join("");
+  const marqueeTrack = singleSet + singleSet;
+
+  return `
+    <section id="section-certificates" class="content-section">
+      <p class="section-label">CERTIFICATIONS & BADGES</p>
+      <h2 class="section-title">Credentials</h2>
+      <div class="certs-grid">${certCards}</div>
+      <p class="badges-section-label">CREDLY BADGES</p>
+      <div class="badges-marquee">
+        <div class="badges-track">${marqueeTrack}</div>
+      </div>
+    </section>
+  `;
+}
+
+// ---------- Education / Timeline ----------
+function renderEducation(education) {
+  const edu = education || [];
+
+  const entriesHtml = edu
+    .map((e, i) => {
+      const side = i % 2 === 0 ? "left" : "right";
+      return `
+      <div class="timeline-item timeline-${side}" style="--i:${i}">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <span class="timeline-date"><i class="fas fa-calendar-alt"></i> ${e.date_graduated || ""}</span>
+          <div class="timeline-card-header">
+            <img src="${normalizePath(e.school_logo_url)}" alt="" class="edu-logo" />
+            <div>
+              <h4 class="edu-school">${e.school || ""}</h4>
+              <span class="edu-level">${(e.education || "").replace("_", " ")}</span>
             </div>
           </div>
+          <p class="edu-course">${e.course_strand || ""}</p>
+          <p class="edu-meta"><i class="fas fa-map-marker-alt"></i> ${e.location || ""}</p>
         </div>
       </div>`;
     })
     .join("");
 
-  observeAll(grid);
-  setupProjectCardToggles();
-  setupProjectFilters();
-}
-
-function renderExposure(items) {
-  const grid = document.getElementById("exposureGrid");
-  grid.innerHTML = (items || [])
-    .map(
-      (x) => `
-      <div class="col-lg-6" data-reveal>
-        <div class="exposure-card" data-aos="fade-up">
-          <h4 class="mb-1">${x.title}</h4>
-          <div class="fw-lighter small mb-2">${x.org} • ${x.period}</div>
-          <ul class="mb-3">
-            ${(x.highlights || []).map((h) => `<li>${h}</li>`).join("")}
-          </ul>
-          ${
-            x.file
-              ? `
-          <div class="mt-3">
-            <button class="btn btn-sm btn-outline-primary exposure-btn" 
-                    data-file="${x.file}" 
-                    data-name="${x.title}">
-              <i class="fas fa-eye me-1"></i>View Attachment
-            </button>
-          </div>
-          `
-              : ""
-          }
-        </div>
-      </div>`
-    )
-    .join("");
-  observeAll(grid);
-
-  // Add event listeners for exposure buttons
-  $$(".exposure-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const filePath = this.getAttribute("data-file");
-      const exposureName = this.getAttribute("data-name");
-      showCertificateModal(filePath, exposureName);
-    });
-  });
-}
-
-function renderCertificates(certs) {
-  const grid = $("#certificatesGrid");
-  if (!grid) {
-    console.error("Certificate grid element not found");
-    return;
-  }
-
-  if (!certs || certs.length === 0) {
-    grid.innerHTML =
-      '<div class="col-12 text-center"><p class="text-muted">No certificates available</p></div>';
-    return;
-  }
-
-  grid.innerHTML = certs
-    .map(
-      (c, idx) => `
-      <div class="col-lg-4 col-md-6" data-reveal>
-        <div class="certificate-card" data-aos="zoom-in">
-          <div class="certificate-icon"><i class="fas fa-award"></i></div>
-          <h5>${c.name || "Certificate"}</h5>
-          <p class="mb-1">${c.issuer || "Unknown Issuer"}</p>
-          <span class="badge bg-primary-subtle text-primary">${
-            c.year || "N/A"
-          }</span>
-          <div class="mt-3">
-            <button class="btn btn-sm btn-outline-primary certificate-btn" 
-                    data-file="${c.file}" 
-                    data-name="${c.name || "Certificate"}">
-              <i class="fas fa-eye me-1"></i>View Certificate
-            </button>
-          </div>
-        </div>
-      </div>`
-    )
-    .join("");
-
-  observeAll(grid);
-
-  // Add event listeners for certificate buttons
-  $$(".certificate-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const filePath = this.getAttribute("data-file");
-      const certificateName = this.getAttribute("data-name");
-      showCertificateModal(filePath, certificateName);
-    });
-  });
-
-  // Add modal to the page if it doesn't exist
-  if (!document.getElementById("certificateModal")) {
-    const modalHTML = `
-      <div class="modal fade" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content" style="background: var(--white-bg); border: 1px solid var(--border-color);">
-            <div class="modal-header" style="border-bottom: 1px solid var(--border-color);">
-              <h5 class="modal-title text-white" id="certificateModalLabel">Certificate</h5>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-              <div id="certificateContent">
-                <div class="spinner-border text-primary" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  return `
+    <section id="section-education" class="content-section">
+      <p class="section-label">TIMELINE</p>
+      <h2 class="section-title">Education</h2>
+      <div class="timeline-container">
+        <div class="timeline-line"></div>
+        ${entriesHtml}
       </div>
-    `;
-    document.body.insertAdjacentHTML("beforeend", modalHTML);
-  }
-}
-
-// Function to show certificate in modal
-function showCertificateModal(filePath, certificateName) {
-  const modalElement = document.getElementById("certificateModal");
-  const modalTitle = document.getElementById("certificateModalLabel");
-  const certificateContent = document.getElementById("certificateContent");
-
-  if (!modalElement || !modalTitle || !certificateContent) {
-    console.error("Modal elements not found");
-    return;
-  }
-
-  // Show modal manually without Bootstrap JS
-  modalTitle.textContent = certificateName || "Certificate";
-
-  // Show loading spinner
-  certificateContent.innerHTML = `
-    <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-    </div>
+    </section>
   `;
+}
 
-  // Show modal manually
-  modalElement.style.display = "block";
-  modalElement.classList.add("show");
-  modalElement.setAttribute("aria-modal", "true");
-  modalElement.setAttribute("role", "dialog");
-  modalElement.removeAttribute("aria-hidden");
-  document.body.classList.add("modal-open");
+// ---------- Operations Log ----------
+function renderOperationsLog(exposure) {
+  const exp = exposure || [];
+  if (!exp.length) return "";
 
-  // Add backdrop if it doesn't exist
-  let backdrop = document.querySelector(".modal-backdrop");
-  if (!backdrop) {
-    backdrop = document.createElement("div");
-    backdrop.className = "modal-backdrop fade show";
-    document.body.appendChild(backdrop);
-  }
+  const opsHtml = exp
+    .map((x) => `
+    <div class="ops-entry">
+      <h4 class="ops-role"><i class="fas fa-crosshairs"></i> ${x.title || ""}</h4>
+      <p class="ops-org">${x.org || ""}</p>
+      <p class="ops-period">${x.period || ""}</p>
+      <ul>${(x.highlights || []).map((h) => `<li>${h}</li>`).join("")}</ul>
+    </div>
+  `)
+    .join("");
 
-  // Close modal function
-  const closeModal = () => {
-    modalElement.style.display = "none";
-    modalElement.classList.remove("show");
-    modalElement.setAttribute("aria-hidden", "true");
-    modalElement.removeAttribute("aria-modal");
-    modalElement.removeAttribute("role");
-    document.body.classList.remove("modal-open");
-    if (backdrop) {
-      backdrop.remove();
-    }
-  };
+  return `
+    <section id="section-operations" class="content-section">
+      <p class="section-label">OPERATIONS</p>
+      <h2 class="section-title">Operations Log</h2>
+      ${opsHtml}
+    </section>
+  `;
+}
 
-  // Add close functionality
-  const closeButtons = modalElement.querySelectorAll(
-    '[data-bs-dismiss="modal"]'
+function initTimeline() {
+  const items = $$(".timeline-item");
+  if (!items.length) return;
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("in-view");
+          observer.unobserve(e.target);
+        }
+      });
+    },
+    { rootMargin: "0px 0px -50px 0px", threshold: 0.15 }
   );
-  closeButtons.forEach((btn) => {
-    btn.onclick = closeModal;
-  });
-
-  // Close on backdrop click
-  backdrop.onclick = closeModal;
-
-  // Close on Escape key
-  const escapeHandler = (e) => {
-    if (e.key === "Escape") {
-      closeModal();
-      document.removeEventListener("keydown", escapeHandler);
-    }
-  };
-  document.addEventListener("keydown", escapeHandler);
-
-  // Small delay to ensure modal is visible before loading content
-  setTimeout(() => {
-    if (!filePath) {
-      certificateContent.innerHTML = `
-        <div class="alert alert-warning" role="alert">
-          <i class="fas fa-exclamation-triangle me-2"></i>
-          Certificate file not available
-        </div>
-      `;
-      return;
-    }
-
-    // Check if file is a PDF or image
-    if (filePath.toLowerCase().endsWith(".pdf")) {
-      certificateContent.innerHTML = `
-        <div class="pdf-container">
-          <embed src="${filePath}" type="application/pdf" width="100%" height="500px" style="border-radius: 8px; border: 1px solid var(--border-color);" />
-          <div class="mt-3">
-            <a href="${filePath}" target="_blank" class="btn btn-primary btn-sm">
-              <i class="fas fa-external-link-alt me-1"></i>Open in New Tab
-            </a>
-          </div>
-        </div>
-      `;
-    } else {
-      // Assume it's an image
-      certificateContent.innerHTML = `
-        <div class="image-container">
-          <img src="${filePath}" 
-               alt="${certificateName}" 
-               class="img-fluid" 
-               style="max-height: 500px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);"
-               onload="this.style.opacity=1" 
-               onerror="this.parentElement.innerHTML='<div class=\\'alert alert-danger\\' role=\\'alert\\'>Failed to load certificate image</div>'"
-               style="opacity: 0; transition: opacity 0.3s ease;" />
-        </div>
-      `;
-    }
-  }, 100);
+  items.forEach((item) => observer.observe(item));
 }
 
-function renderContact(contact, socials) {
-  // Update email links
-  const primaryEmail = $("#primaryEmail");
-  const backupEmail = $("#backupEmail");
-  const locationText = $("#locationText");
-  const socialLinksContainer = $("#socialLinksContainer");
+// ---------- Contact ----------
+function renderContact(contact, profile) {
+  const c = contact || {};
+  const socials = profile?.socials || [];
+  const primaryEmail = "arvyaggabao.7@gmail.com";
+  const backupEmail = "aggabaoarvy072004@gmail.com";
+  const location = c.location || "—";
 
-  if (primaryEmail && contact.email) {
-    primaryEmail.textContent = contact.email;
-    primaryEmail.href = `mailto:${contact.email}`;
-  }
+  const socialRows = socials
+    .map((s) =>
+      `<div class="contact-row"><span class="key"><i class="fab fa-${s.platform}"></i> ${(s.platform || "").toUpperCase()}</span> <a href="${s.url}" target="_blank" rel="noopener">${s.url}</a></div>`
+    )
+    .join("");
 
-  if (backupEmail && contact.backup_email) {
-    backupEmail.textContent = contact.backup_email;
-    backupEmail.href = `mailto:${contact.backup_email}`;
-  }
-
-  if (locationText && contact.location) {
-    locationText.textContent = contact.location;
-  }
-
-  // Populate social links
-  if (socialLinksContainer && socials && socials.length > 0) {
-    socialLinksContainer.innerHTML = socials
-      .map(
-        (social) => `
-        <a href="${social.url}" 
-           target="_blank" 
-           rel="noopener" 
-           class="social-btn ${social.platform}-btn" 
-           aria-label="${social.platform}">
-          <i class="fab fa-${social.platform}"></i>
-          <span>${
-            social.platform.charAt(0).toUpperCase() + social.platform.slice(1)
-          }</span>
-        </a>
-      `
-      )
-      .join("");
-  }
+  return `
+    <section id="section-contact" class="content-section">
+      <div>
+        <p class="section-label">CONTACT</p>
+        <h2 class="section-title">Secure Channel</h2>
+        <p class="contact-blurb">For operational or collaboration inquiries, use the channels below.</p>
+        <div class="contact-rows">
+          <div class="contact-row"><span class="key"><i class="fas fa-envelope"></i> EMAIL</span> <a href="mailto:${primaryEmail}">${primaryEmail}</a></div>
+          <div class="contact-row"><span class="key"><i class="fas fa-envelope-open"></i> BACKUP</span> <a href="mailto:${backupEmail}">${backupEmail}</a></div>
+          <div class="contact-row"><span class="key"><i class="fas fa-map-marker-alt"></i> LOCATION</span> ${location}</div>
+        </div>
+        <div class="social-rows contact-rows">${socialRows}</div>
+      </div>
+      <div class="terminal-block">
+        <div class="term-line"><span class="term-prompt">$</span> whoami</div>
+        <div class="term-line">${profile?.name || "subject"}</div>
+        <div class="term-line"><span class="term-prompt">$</span> status --clearance</div>
+        <div class="term-line"><span class="term-redacted">LEVEL_4_ACTIVE</span></div>
+        <div class="term-line"><span class="term-prompt">$</span> <span class="term-cursor"></span></div>
+      </div>
+    </section>
+  `;
 }
 
+// ---------- Footer ----------
+function renderFooter(profile) {
+  const text = profile?.footerText || "© All rights reserved.";
+  return `
+    <p class="footer-text">${text}</p>
+    <span class="footer-easter" title="Easter egg">FLAG{cl4ss1f13d_d0551er_v4}</span>
+    <span class="footer-easter" title="Easter egg">REDACTED</span>
+  `;
+}
+
+// ---------- Main: fetch, render, boot ----------
 async function bootstrap() {
   try {
     const res = await fetch("data.json", { cache: "no-store" });
     const data = await res.json();
 
-    // Profile and hero
-    if (data.profile?.name) {
-      const firstName = data.profile.name.split(" ")[0];
-      document.title = `${firstName} - Portfolio`;
-    }
-    $("#brandName").textContent = data.profile.brand || data.profile.name;
-    $("#heroName").textContent = data.profile.name;
-    $("#heroImage").src = data.profile.photo;
-    $("#footerText").textContent = data.profile.footerText || "";
+    renderSidebar(data);
+    renderStatusBar(data);
 
-    // Set GitHub button URL
-    const githubBtn = $("#githubBtn");
-    const githubSocial = data.profile.socials?.find(
-      (s) => s.platform === "github"
-    );
-    if (githubBtn && githubSocial) {
-      githubBtn.href = githubSocial.url;
-    }
+    const content = $("#content");
+    const footer = $("#footer");
 
-    // Typed.js with data keywords
-    if (
-      Array.isArray(data.profile.titleKeywords) &&
-      data.profile.titleKeywords.length
-    ) {
-      new Typed("#typed-text", {
-        strings: data.profile.titleKeywords,
-        typeSpeed: 60,
-        backSpeed: 40,
-        loop: true,
-      });
-    }
+    content.innerHTML =
+      renderHero(data.profile) +
+      renderStats(data) +
+      renderAbout(data.about, data.profile, data.contact) +
+      renderEducation(data.education) +
+      renderSkills(data.skills) +
+      renderProjects(data.projects) +
+      renderOperationsLog(data.exposure) +
+      renderCertificates(data.certificates, data.credly_badges) +
+      renderContact(data.contact, data.profile);
 
-    // Sections
-    renderAbout(data.about);
-    renderEducation(data.education || []);
-    renderSkills(data.skills || []);
-    renderProjects(data.projects || []);
-    // Exposure replaces Experience
-    renderExposure(data.exposure || data.experience || []);
-    renderCertificates(data.certificates || []);
-    renderContact(data.contact || {}, data.profile.socials || []);
+    footer.innerHTML = renderFooter(data.profile);
 
-    // AOS init after content
-    AOS.init({ duration: 800, once: true });
+    initProjectFilters();
+    initShowcaseCarousel();
+    initTimeline();
+    initScrollSpy();
+    initObservers();
+    initClearanceBar();
+    initSidebarToggle();
+    initDarkLightToggle();
+    initBackToTop();
 
-    // Force dark mode tokens (palette is dark-first)
-    document.documentElement.classList.add("dark");
+    triggerBootSequence(data);
 
-    // Init scrollspy and header interactions after DOM is ready
-    setupScrollSpy();
-    initHeaderInteractions();
+    setTimeout(() => {
+      initTypewriter(data.profile?.titleKeywords || []);
+      initCanvas();
+      initCursor();
+    }, 4000);
   } catch (e) {
-    console.error("Failed to load data.json", e);
+    console.error("Failed to load dossier data", e);
+    $("#boot").classList.add("done");
+    $("#app").style.opacity = "1";
   }
 }
 
 document.addEventListener("DOMContentLoaded", bootstrap);
-
-// Expansion toggles for project cards
-function setupProjectCardToggles() {
-  let expandedCard = null;
-
-  $$(".project-card").forEach((card) => {
-    const head = card.querySelector(".project-head");
-    const body = card.querySelector(".project-body");
-    const toggleBtn = card.querySelector(".project-toggle");
-
-    const setMax = (open) => {
-      if (open) {
-        // Reset max-height to measure actual content height
-        body.style.maxHeight = "none";
-        body.style.padding = "1.2rem 1.4rem 1.4rem";
-        body.style.opacity = "1";
-
-        // Get the actual content height including padding
-        const height = body.scrollHeight;
-
-        // Reset to collapsed state for animation
-        body.style.maxHeight = "0";
-        body.style.padding = "0 1.4rem";
-        body.style.opacity = "0";
-
-        // Force reflow and animate to full height with some extra space
-        requestAnimationFrame(() => {
-          body.style.maxHeight = height + 40 + "px";
-          body.style.padding = "1.2rem 1.4rem 1.4rem";
-          body.style.opacity = "1";
-        });
-      } else {
-        // Get current height for smooth collapse
-        const currentHeight = body.scrollHeight;
-        body.style.maxHeight = currentHeight + "px";
-
-        // Force reflow then collapse
-        requestAnimationFrame(() => {
-          body.style.maxHeight = "0";
-          body.style.padding = "0 1.4rem";
-          body.style.opacity = "0";
-        });
-      }
-    };
-
-    const closeCard = () => {
-      card.classList.remove("expanded");
-      toggleBtn.setAttribute("aria-expanded", "false");
-      head.setAttribute("aria-expanded", "false");
-      setMax(false);
-      if (expandedCard === card) {
-        expandedCard = null;
-      }
-    };
-
-    const openCard = () => {
-      // Close previously expanded card
-      if (expandedCard && expandedCard !== card) {
-        const prevBody = expandedCard.querySelector(".project-body");
-        const prevToggleBtn = expandedCard.querySelector(".project-toggle");
-        const prevHead = expandedCard.querySelector(".project-head");
-
-        expandedCard.classList.remove("expanded");
-        prevToggleBtn.setAttribute("aria-expanded", "false");
-        prevHead.setAttribute("aria-expanded", "false");
-
-        // Smooth collapse of previous card
-        const currentHeight = prevBody.scrollHeight;
-        prevBody.style.maxHeight = currentHeight + "px";
-        requestAnimationFrame(() => {
-          prevBody.style.maxHeight = "0";
-          prevBody.style.padding = "0 1.4rem";
-          prevBody.style.opacity = "0";
-        });
-      }
-
-      card.classList.add("expanded");
-      toggleBtn.setAttribute("aria-expanded", "true");
-      head.setAttribute("aria-expanded", "true");
-      setMax(true);
-      expandedCard = card;
-    };
-
-    const toggle = () => {
-      const isExpanded = card.classList.contains("expanded");
-      if (isExpanded) {
-        closeCard();
-      } else {
-        openCard();
-      }
-    };
-
-    // Initialize collapsed
-    body.style.maxHeight = "0";
-
-    head.addEventListener("click", toggle);
-    head.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggle();
-      }
-    });
-    toggleBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      toggle();
-    });
-
-    // Adjust maxHeight on resize for smoothness
-    const resizeHandler = () => {
-      if (card.classList.contains("expanded")) {
-        body.style.maxHeight = "none";
-        body.style.padding = "1.2rem 1.4rem 1.4rem";
-        body.style.opacity = "1";
-        const height = body.scrollHeight;
-        body.style.maxHeight = height + 40 + "px";
-      }
-    };
-
-    window.addEventListener("resize", resizeHandler);
-
-    // Store the resize handler reference for cleanup if needed
-    card._resizeHandler = resizeHandler;
-  });
-
-  // Close expanded card when clicking outside
-  const outsideClickHandler = (e) => {
-    if (expandedCard && !expandedCard.contains(e.target)) {
-      const body = expandedCard.querySelector(".project-body");
-      const toggleBtn = expandedCard.querySelector(".project-toggle");
-      const head = expandedCard.querySelector(".project-head");
-
-      expandedCard.classList.remove("expanded");
-      toggleBtn.setAttribute("aria-expanded", "false");
-      head.setAttribute("aria-expanded", "false");
-
-      const currentHeight = body.scrollHeight;
-      body.style.maxHeight = currentHeight + "px";
-      requestAnimationFrame(() => {
-        body.style.maxHeight = "0";
-        body.style.padding = "0 1.4rem";
-        body.style.opacity = "0";
-      });
-      expandedCard = null;
-    }
-  };
-
-  document.addEventListener("click", outsideClickHandler);
-}
-
-// Project filtering functionality
-function setupProjectFilters() {
-  const tabButtons = $$(".tab-btn");
-  const projectItems = $$(".project-item");
-
-  tabButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-filter");
-
-      // Update active tab
-      tabButtons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      // Close any expanded project cards first
-      const expandedCards = $$(".project-card.expanded");
-      expandedCards.forEach((card) => {
-        const body = card.querySelector(".project-body");
-        const toggleBtn = card.querySelector(".project-toggle");
-        const head = card.querySelector(".project-head");
-
-        card.classList.remove("expanded");
-        toggleBtn.setAttribute("aria-expanded", "false");
-        head.setAttribute("aria-expanded", "false");
-
-        const currentHeight = body.scrollHeight;
-        body.style.maxHeight = currentHeight + "px";
-        requestAnimationFrame(() => {
-          body.style.maxHeight = "0";
-          body.style.padding = "0 1.4rem";
-          body.style.opacity = "0";
-        });
-      });
-
-      // Filter projects with smoother animation
-      projectItems.forEach((item, index) => {
-        const projectType = item.getAttribute("data-type");
-        const shouldShow = filter === "all" || projectType === filter;
-        const card = item.querySelector(".project-card");
-
-        if (shouldShow) {
-          // Show items with staggered delay
-          item.style.display = "block";
-          item.classList.remove("hiding");
-
-          setTimeout(() => {
-            card.classList.remove("filtered-out");
-            card.classList.add("filtered-in");
-          }, index * 50); // Staggered appearance
-        } else {
-          // Hide items immediately but with animation
-          card.classList.remove("filtered-in");
-          card.classList.add("filtered-out");
-          item.classList.add("hiding");
-
-          // Actually hide after animation completes
-          setTimeout(() => {
-            if (card.classList.contains("filtered-out")) {
-              item.style.display = "none";
-            }
-          }, 400);
-        }
-      });
-    });
-  });
-
-  // Initialize all projects as visible
-  projectItems.forEach((item) => {
-    const card = item.querySelector(".project-card");
-    card.classList.add("filtered-in");
-  });
-}
-
-// Custom header interactions (hamburger + active pill)
-function initHeaderInteractions() {
-  const header = document.getElementById("mainHeader");
-  const nav = document.getElementById("appNav");
-  const toggle = document.getElementById("navToggle");
-  if (!header || !nav || !toggle) return;
-
-  const close = () => {
-    header.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-  };
-  const open = () => {
-    header.classList.add("open");
-    toggle.setAttribute("aria-expanded", "true");
-  };
-  const toggleMenu = () => {
-    header.classList.contains("open") ? close() : open();
-  };
-
-  toggle.addEventListener("click", toggleMenu);
-  nav.querySelectorAll(".nav-link").forEach((a) => {
-    a.addEventListener("click", () => {
-      close();
-    });
-  });
-
-  window.addEventListener("resize", positionActivePill);
-  positionActivePill();
-}
-
-function positionActivePill() {
-  const nav = document.getElementById("appNav");
-  if (!nav) return;
-  const pill = nav.querySelector(".active-pill");
-  const active =
-    nav.querySelector(".nav-link.active") || nav.querySelector(".nav-link");
-  if (!pill || !active) return;
-  const navRect = nav.getBoundingClientRect();
-  const aRect = active.getBoundingClientRect();
-  const left = aRect.left - navRect.left;
-  const width = aRect.width;
-  pill.style.opacity = "1";
-  pill.style.transform = `translateX(${left}px)`;
-  pill.style.width = `${Math.max(34, width)}px`;
-}

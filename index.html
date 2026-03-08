@@ -3,26 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arvy - Portfolio</title>
+    <title>DOSSIER — Subject File</title>
     <link rel="icon" type="image/png" href="images/logo.png" />
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      crossorigin="anonymous"
-    />
-
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Playfair+Display:wght@600;700;800&display=swap"
       rel="stylesheet"
-    />
-
-    <!-- Devicon Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
     />
 
     <!-- Font Awesome -->
@@ -33,244 +22,86 @@
       referrerpolicy="no-referrer"
     />
 
-    <!-- AOS CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Devicon -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css"
+    />
 
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- Custom Header -->
-    <header class="app-header" id="mainHeader">
-      <div class="header-wrap">
-        <a class="brand" href="#hero">
-          <img src="images/logo.png" alt="Logo" class="brand-logo" />
-          <span id="brandName">Arvss</span>
-        </a>
-        <button
-          class="hamburger"
-          id="navToggle"
-          aria-label="Toggle navigation"
-          aria-controls="appNav"
-          aria-expanded="false"
-        >
-          <span></span><span></span><span></span>
-        </button>
-        <nav class="nav-links" id="appNav">
-          <a class="nav-link" href="#about">About</a>
-          <a class="nav-link" href="#skills">Skills</a>
-          <a class="nav-link" href="#projects">Projects</a>
-          <a class="nav-link" href="#exposure">Exposure</a>
-          <a class="nav-link" href="#certificates">Certificates</a>
-          <a class="nav-link" href="#contact">Contact</a>
-          <span class="active-pill" aria-hidden="true"></span>
-        </nav>
-      </div>
-    </header>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero-rich">
-      <div class="hero-bg" aria-hidden="true">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="grid-overlay"></div>
-      </div>
-      <div class="container">
-        <div class="row align-items-center min-vh-75">
-          <div class="col-lg-7 order-2 order-lg-1">
-            <div
-              class="hero-content text-lg-start text-center"
-              data-aos="fade-right"
-            >
-              <h1 class="mb-3">
-                Hello, I'm
-                <span class="highlight" id="heroName">Arvy Aggabao</span>
-              </h1>
-              <p class="lead mb-4">
-                A passionate IT Undergraduate specializing in
-                <span
-                  class="fw-bold"
-                  style="color: var(--primary-color)"
-                  id="typed-text"
-                ></span>
-              </p>
-              <div
-                class="hero-buttons d-flex flex-wrap gap-2 justify-content-lg-start justify-content-center"
-              >
-                <a
-                  href="#"
-                  class="btn btn-primary btn-hero"
-                  id="githubBtn"
-                  target="_blank"
-                  rel="noopener"
-                  ><i class="fab fa-github me-2"></i>View My GitHub</a
-                >
-                <a href="#contact" class="btn btn-outline-primary btn-hero">
-                  <i class="fas fa-paper-plane me-2"></i>
-                  Let's Connect
-                </a>
-              </div>
-              <div class="scroll-cue mt-4"><span></span></div>
-            </div>
-          </div>
-          <div
-            class="col-lg-5 order-1 order-lg-2 text-center"
-            data-aos="fade-left"
-          >
-            <img
-              id="heroImage"
-              src="images/me.jpg"
-              alt="Arvy"
-              class="hero-img"
-            />
-          </div>
+    <div id="boot">
+      <div class="boot-inner">
+        <h1 class="boot-title">Loading please wait...</h1>
+        <div class="boot-logs">
+          <div class="boot-line" data-boot-line="0"></div>
+          <div class="boot-line" data-boot-line="1"></div>
+          <div class="boot-line" data-boot-line="2"></div>
+          <div class="boot-line" data-boot-line="3"></div>
+          <div class="boot-line" data-boot-line="4"></div>
         </div>
+        <div class="boot-progress-wrap">
+          <div class="boot-progress-bar"></div>
+        </div>
+        <p class="boot-status">Initializing subject file...</p>
       </div>
-    </section>
-
-    <div class="section-sep wave-bottom" aria-hidden="true">
-      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path
-          d="M0,0 C300,100 1140,0 1440,100 L1440,0 L0,0 Z"
-          fill="currentColor"
-        ></path>
-      </svg>
     </div>
 
-    <!-- About Section -->
-    <section id="about">
-      <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <p
-          id="aboutIntro"
-          class="lead text-center mx-auto"
-          style="max-width: 900px"
-        ></p>
-        <div class="row g-4" id="aboutFeatures"></div>
-
-        <!-- Education Section -->
-        <div class="mt-5">
-          <h3 class="text-center mb-4" style="color: var(--primary-color)">
-            <i class="fas fa-graduation-cap me-2"></i>Educational Background
-          </h3>
-          <div class="row g-4" id="educationGrid"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills-rich">
-      <div class="container">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="row g-4" id="skillsGrid"></div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <div class="project-tabs mb-4">
-          <div class="tabs-container">
-            <button class="tab-btn active" data-filter="all">All</button>
-            <button class="tab-btn" data-filter="code">Coding Projects</button>
-            <button class="tab-btn" data-filter="paper">Research</button>
-            <button class="tab-btn" data-filter="others">Others</button>
+    <div id="app" style="opacity: 0">
+      <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+      <aside id="sidebar">
+        <div class="sidebar-header">
+          <img src="images/logo.png" alt="" class="sidebar-logo" />
+          <h2 class="sidebar-subject-name"></h2>
+          <p class="sidebar-brand"></p>
+          <div class="sidebar-status">
+            <span class="status-dot"></span>
+            <span class="status-label">ONLINE</span>
           </div>
+          <button type="button" class="dark-light-toggle" id="darkLightToggle">
+            <i class="fas fa-moon"></i> CLASSIFIED
+          </button>
         </div>
-        <div class="row g-4" id="projectsGrid"></div>
-      </div>
-    </section>
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+        <div class="sidebar-filters" id="sidebarFilters"></div>
+        <div class="sidebar-clearance">
+          <div class="clearance-label">CLEARANCE PROGRESS</div>
+          <div class="clearance-bar"><div class="clearance-fill"></div></div>
+        </div>
+      </aside>
 
-    <!-- Experience Section -->
-    <section id="exposure">
-      <div class="container">
-        <h2 class="section-title">Industry & Community Exposure</h2>
-        <div class="row g-4" id="exposureGrid"></div>
-      </div>
-    </section>
-
-    <!-- Certificates Section -->
-    <section id="certificates" class="certs-rich">
-      <div class="container">
-        <h2 class="section-title">Certificates</h2>
-        <div class="row g-4" id="certificatesGrid"></div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-      <div class="container">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="row g-4 justify-content-center">
-          <div class="col-lg-8">
-            <div class="contact-info-card" data-aos="fade-up">
-              <div class="row g-4">
-                <div class="col-md-6">
-                  <div class="contact-item">
-                    <div class="contact-icon">
-                      <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-details">
-                      <h5>Primary Email</h5>
-                      <a
-                        href="mailto:aggabaoarvy072004@gmail.com"
-                        id="primaryEmail"
-                        >aggabaoarvy072004@gmail.com</a
-                      >
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="contact-item">
-                    <div class="contact-icon">
-                      <i class="fas fa-envelope-open"></i>
-                    </div>
-                    <div class="contact-details">
-                      <h5>Backup Email</h5>
-                      <a
-                        href="mailto:aggabaoarvy072004@yahoo.com"
-                        id="backupEmail"
-                        >aggabaoarvy072004@yahoo.com</a
-                      >
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="contact-item">
-                    <div class="contact-icon">
-                      <i class="fas fa-location-dot"></i>
-                    </div>
-                    <div class="contact-details">
-                      <h5>Location</h5>
-                      <p id="locationText">Cabagan, Isabela, Philippines</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Social Media Links -->
-              <div class="social-connect mt-4">
-                <h5 class="text-center mb-3">Follow Me</h5>
-                <div class="social-links" id="socialLinksContainer">
-                  <!-- Social buttons will be populated by JavaScript -->
-                </div>
-              </div>
-            </div>
+      <div id="main-wrap">
+        <header id="status-bar">
+          <div class="status-bar-left">
+            <span class="class-pill class-secret">SECRET</span>
+            <span class="class-pill class-subject">SUBJECT</span>
+            <span class="status-bar-name"></span>
+            <span class="status-bar-location"></span>
           </div>
-        </div>
+          <div class="status-bar-right">
+            <time id="liveClock" class="status-bar-clock" datetime="">--:--:--</time>
+          </div>
+        </header>
+
+        <main id="content"></main>
+
+        <footer id="footer"></footer>
       </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-      <p id="footerText">&copy; 2025 Arvss. All rights reserved.</p>
-    </footer>
+      <button type="button" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
     <script src="main.js"></script>
   </body>
 </html>
