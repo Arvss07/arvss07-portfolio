@@ -9,6 +9,8 @@
       { "platform": "linkedin", "url": "https://www.linkedin.com/in/arvss07" },
       { "platform": "facebook", "url": "https://www.facebook.com/Arvss07" }
     ],
+    "cv": "files/Aggabao_Arvy_CV.pdf",
+    "resume": "files/Aggabao_Arvy_Resume.pdf",
     "footerText": "© 2025 Arvss. All rights reserved."
   },
   "about": {
@@ -480,6 +482,13 @@
       "description": "A landing page for Tara-vel, a public transportation companion app for Cagayan Valley commuters.",
       "image": "images/projectHeaders/taravel-landing-page.png",
       "tags": ["Next.js", "GSAP", "JavaScript", "Tailwind CSS 4 (with DaisyUI)"]
+    },
+    {
+      "type": "code",
+      "title": "ITE Digital Portfolio",
+      "description": "This platform serves as a centralized digital repository for ITED instructors at the University of Saint Louis Tuguegarao to submit and organize their departmental requirements, providing the program chair with a structured environment to review and verify faculty submissions.",
+      "image": "images/projectHeaders/ITEDigitalPortfolio.png",
+      "tags": ["React", "Node.js", "Express", "Full Stack"]
     }
   ],
   "exposure": [
@@ -542,7 +551,61 @@
   ],
   "certificates": [
     {
-      "name": "Cyber Threat Management Complettion Certificate",
+      "name": "Network Defense Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/NetworkDefense.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Ethical Hacking Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/EthicalHacking.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Endpoint Security Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/EndpointSecurity.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Network Devices and Initial Configuration",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/NetworkDevices.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Networking Basics Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/NetworkingBasics.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Apply AI: Update your Resume",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/ApplyAI.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Operating Systems Basics Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/OperatingSystemsBasics.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Computer Hardware Basics Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/ComputerHardwareBasics.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Data Analytics Essentials Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/DataAnalyticsEssentials.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Cyber Threat Management Completion Certificate",
       "issuer": "Cisco Networking Academy",
       "file": "files/CyberThreatManagement_cert.pdf",
       "year": 2025
@@ -600,5 +663,19 @@
     "email": "aggabaoarvy072004@gmail.com",
     "backup_email": "aggabaoarvy072004@yahoo.com",
     "location": "Cabagan, Isabela, Philippines"
-  }
+  },
+  "credly_badges": [
+    "credly_badges/apply-ai-update-your-resume.png",
+    "credly_badges/computer-hardware-basics.png",
+    "credly_badges/cyber-threat-management.png",
+    "credly_badges/data-analytics-essentials.png",
+    "credly_badges/endpoint-security.png",
+    "credly_badges/ethical-hacker.png",
+    "credly_badges/introduction-to-cybersecurity.png",
+    "credly_badges/introduction-to-data-science.png",
+    "credly_badges/network-defense.png",
+    "credly_badges/networking-basics.png",
+    "credly_badges/networking-devices-and-initial-configuration.png",
+    "credly_badges/operating-systems-basics.png"
+  ]
 }
