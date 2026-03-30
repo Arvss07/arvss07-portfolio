@@ -490,6 +490,20 @@
       "description": "This platform serves as a centralized digital repository for ITED instructors at the University of Saint Louis Tuguegarao to submit and organize their departmental requirements, providing the program chair with a structured environment to review and verify faculty submissions.",
       "image": "images/projectHeaders/ITEDigitalPortfolio.png",
       "tags": ["React", "Node.js", "Express", "Full Stack"]
+    },
+    {
+      "type": "code",
+      "resource_links": [
+        {
+          "type": "live",
+          "url": "https://java-fundamentals-website.hermitcraftonly07.workers.dev/",
+          "label": "Live Site"
+        }
+      ],
+      "title": "Java 101",
+      "description": "A static learning website for Java fundamentals. Contains information about the background, data types, operators, conditionals, loops, and the Scanner class. Built with plain HTML, CSS, and JavaScript, hosted on Cloudflare Pages.",
+      "image": "images/projectHeaders/java-fund.png",
+      "tags": ["HTML", "CSS", "JavaScript", "Cloudflare Pages", "Java"]
     }
   ],
   "exposure": [
@@ -551,6 +565,30 @@
     }
   ],
   "certificates": [
+    {
+      "name": "Digital Awareness Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/DigitalAwareness.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Digital Safety and Security Awareness Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/DigitalSafetySecurityAwareness.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Industrial Cybersecurity Essentials Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/IndustrialCybersecurityEssentials.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Network Support and Security Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/NetworkSupportSecurity.pdf",
+      "year": 2026
+    },
     {
       "name": "Network Defense Completion Certificate",
       "issuer": "Cisco Networking Academy",
@@ -670,13 +708,17 @@
     "credly_badges/computer-hardware-basics.png",
     "credly_badges/cyber-threat-management.png",
     "credly_badges/data-analytics-essentials.png",
+    "credly_badges/digital-awareness.png",
+    "credly_badges/digital-safety-and-security-awareness.png",
     "credly_badges/endpoint-security.png",
     "credly_badges/ethical-hacker.png",
+    "credly_badges/industrial-cybersecurity-essentials.png",
     "credly_badges/introduction-to-cybersecurity.png",
     "credly_badges/introduction-to-data-science.png",
     "credly_badges/network-defense.png",
     "credly_badges/networking-basics.png",
     "credly_badges/networking-devices-and-initial-configuration.png",
+    "credly_badges/network-support-and-security.png",
     "credly_badges/operating-systems-basics.png"
   ]
 }
