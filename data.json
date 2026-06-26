@@ -504,6 +504,41 @@
       "description": "A static learning website for Java fundamentals. Contains information about the background, data types, operators, conditionals, loops, and the Scanner class. Built with plain HTML, CSS, and JavaScript, hosted on Cloudflare Pages.",
       "image": "images/projectHeaders/java-fund.png",
       "tags": ["HTML", "CSS", "JavaScript", "Cloudflare Pages", "Java"]
+    },
+    {
+      "type": "code",
+      "title": "USLT Digital Portfolio",
+      "description": "This platform serves as the improved version of ITE Digital Portfolio, built with Laravel, and supports different departments of the University of Saint Louis Tuguegarao in submitting and organizing their departmental requirements, giving the program chairs a structured environment to review and verify submissions.",
+      "image": "https://placehold.co/600x360/F53927/ffffff?text=USLT%20Digital%20Portfolio",
+      "tags": ["Laravel", "Vue (Prime Vue)", "MySQL", "Full Stack"]
+    },
+    {
+      "type": "code",
+      "title": "University Capture the Flag",
+      "description": "Built and operated the infrastructure for a university CTF, using Dockerized challenges, Nginx routing, CTFd sync tooling, and Cloudflare Tunnel for public event hosting.",
+      "image": "https://placehold.co/600x360/1F2937/ffffff?text=University%20Capture%20the%20Flag",
+      "tags": ["CTFd", "Docker", "Nginx", "Cloudflare Tunnel", "Python"]
+    },
+    {
+      "type": "code",
+      "title": "Priorix",
+      "description": "A full-stack personal productivity web app built with Next.js 14, TypeScript, and Firebase. It features task management, Google Calendar and Drive integrations via a BFF pattern, and a GitHub-style contribution heatmap.",
+      "image": "https://placehold.co/600x360/0F766E/ffffff?text=Priorix",
+      "tags": ["Next.js 14", "TypeScript", "Firebase", "BFF", "Productivity"]
+    },
+    {
+      "type": "code",
+      "title": "Recon-X",
+      "description": "An interactive CLI reconnaissance tool built in Python and packaged with uv. It runs as a session-based shell for passive and active recon checks such as subdomain discovery, web crawling, port scanning, vulnerability scanning, secret detection, and cross-platform OSINT harvesting.",
+      "image": "https://placehold.co/600x360/7C3AED/ffffff?text=Recon-X",
+      "tags": ["Python", "CLI", "Reconnaissance", "OSINT", "Security"]
+    },
+    {
+      "type": "paper",
+      "title": "TERM Project: 2-storey Co-Working Space Network Design",
+      "description": "Designed and simulated a collapsed two-tier network for a hypothetical co-working space, covering topology planning, VLAN segmentation, DHCP pooling, centralized wireless management via Cisco WLC, VoIP deployment using Cisco CME, CCTV isolation through ACLs, and end-to-end device configuration.",
+      "image": "https://placehold.co/600x360/334155/ffffff?text=Co-Working%20Space%20Network%20Design",
+      "tags": ["Network Design", "Cisco", "VLAN", "DHCP", "VoIP"]
     }
   ],
   "exposure": [
@@ -565,6 +600,24 @@
     }
   ],
   "certificates": [
+    {
+      "name": "Linux Essentials Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/LinuxEssentials.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Introduction to Modern AI Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/IntroductionModernAI.pdf",
+      "year": 2026
+    },
+    {
+      "name": "Security and Connectivity Support Completion Certificate",
+      "issuer": "Cisco Networking Academy",
+      "file": "files/SecurityConnectivitySupport.pdf",
+      "year": 2026
+    },
     {
       "name": "Digital Awareness Completion Certificate",
       "issuer": "Cisco Networking Academy",
@@ -715,10 +768,13 @@
     "credly_badges/industrial-cybersecurity-essentials.png",
     "credly_badges/introduction-to-cybersecurity.png",
     "credly_badges/introduction-to-data-science.png",
+    "credly_badges/introduction-to-modern-ai.png",
+    "credly_badges/linux-essentials.png",
     "credly_badges/network-defense.png",
     "credly_badges/networking-basics.png",
     "credly_badges/networking-devices-and-initial-configuration.png",
     "credly_badges/network-support-and-security.png",
-    "credly_badges/operating-systems-basics.png"
+    "credly_badges/operating-systems-basics.png",
+    "credly_badges/security-and-connectivity-support.png"
   ]
 }
